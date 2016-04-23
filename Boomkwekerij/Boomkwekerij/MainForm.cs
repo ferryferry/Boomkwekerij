@@ -31,7 +31,7 @@ namespace Boomkwekerij
 					{
 						while (reader.Read())
 						{
-							MessageBox.Show(reader["NAAM"].ToString());
+							MessageBox.Show(reader["ID"].ToString() + reader["NAAM"].ToString());
 
 													//return new Grade(Convert.ToInt32(reader["StudentId"]), Convert.ToDecimal(reader["Analysis"]), Convert.ToDecimal(reader["Design"]), Convert.ToDecimal(reader["Code"]));
 													//return CreateGradeFromReader(reader);
