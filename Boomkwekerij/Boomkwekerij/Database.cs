@@ -1,7 +1,6 @@
 ﻿using System.Data.SQLite;
 using System.IO;
 using Boomkwekerij.Exceptions;
-using System.Windows.Forms;
 
 namespace Boomkwekerij
 {
@@ -12,7 +11,6 @@ namespace Boomkwekerij
 
 		public Database(string fileNmae)
 		{
-			fileNmae = Application.StartupPath+"\\boomkwekerij_database.db";
 			if (File.Exists(fileNmae))
 			{
 				ConnectionString = "Data Source=" + fileNmae + ";Version=3";

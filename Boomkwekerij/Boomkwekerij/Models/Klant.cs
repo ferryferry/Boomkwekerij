@@ -16,6 +16,11 @@ namespace Boomkwekerij.Models
 		public string Telefoonnummer { get; set; }
 		public string Email { get; set; }
 
+		public Klant()
+		{
+
+		}
+
 		public Klant(int id, string naam, string adres, string postcode, string plaats, string telefoonnummer, string email)
 		{
 			Id = id;

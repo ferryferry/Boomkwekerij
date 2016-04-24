@@ -50,23 +50,46 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Contexts\KlantMemoryContext.cs" />
+    <Compile Include="Controllers\Interfaces\IKlantContext.cs" />
+    <Compile Include="Controllers\Interfaces\IRepository.cs" />
+    <Compile Include="Controllers\Repositories\KlantRepository.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Exceptions\DatabaseCouldNotBeFoundException.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="Sorting\ListViewItemComparer.cs" />
+    <Compile Include="Views\KlantAddEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Views\KlantAddEdit.Designer.cs">
+      <DependentUpon>KlantAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Klantbeheer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Klantbeheer.Designer.cs">
+      <DependentUpon>Klantbeheer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Bestelling.cs" />
-    <Compile Include="Models\Boomkwekerij.cs" />
+    <Compile Include="Models\Kwekerij.cs" />
     <Compile Include="Models\Klant.cs" />
     <Compile Include="Models\Levering.cs" />
     <Compile Include="Models\Plant.cs" />
     <Compile Include="Models\Voorraad.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Views\KlantAddEdit.resx">
+      <DependentUpon>KlantAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Klantbeheer.resx">
+      <DependentUpon>Klantbeheer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
