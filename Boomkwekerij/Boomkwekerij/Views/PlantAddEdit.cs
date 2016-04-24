@@ -28,7 +28,7 @@ namespace Boomkwekerij.Views
 			Text = Plant.Naam + " bewerken";
 			if (Plant.Naam == null)
 			{
-				Text = "Nieuwe klant";
+				Text = "Nieuwe plant";
 			}
 
 			txtNaam.Text = Plant.Naam;
@@ -51,6 +51,9 @@ namespace Boomkwekerij.Views
 				Plant.Naam = txtNaam.Text;
 				Plant.Opmerking = txtOpmerking.Text;
 				Plant.PlantGrootte = ConvertPlantGrootte.Convert(Convert.ToInt32(nudMinHoogte.Value), Convert.ToInt32(nudMaxHoogte.Value));
+				Plant.Zaailing = Convert.ToInt32(nudJaarling.Value);
+				Plant.Verplant = Convert.ToInt32(nudVerplant.Value);
+				Plant.Voorraad.Aantal = Convert.ToInt32(nudAantal.Value);
 				DialogResult = DialogResult.OK;
 			}
 		}
@@ -63,6 +66,8 @@ namespace Boomkwekerij.Views
 				SetError(nudMaxHoogte, "Minimale hoogte mag niet groter zijn dan de maximale hoogte!");
 			if (nudMinHoogte.Value == nudMaxHoogte.Value)
 				SetError(nudMaxHoogte, "Hoogtes mogen niet gelijk zijn aan elkaar!");
+			if (nudMinHoogte.Value < nudMaxHoogte.Value-20)
+				SetError(nudMaxHoogte, "Er moet 20 verschil zitten tussen minimale en maximale hoogte!");
 			if (errorCount == 0)
 			{
 				return true;
@@ -80,6 +85,16 @@ namespace Boomkwekerij.Views
 		{
 			epFields.Clear();
 			errorCount = 0;
+		}
+
+		private void nudMinHoogte_ValueChanged(object sender, EventArgs e)
+		{
+			nudMaxHoogte.Value = nudMinHoogte.Value + 20;
+		}
+
+		private void nudMaxHoogte_ValueChanged(object sender, EventArgs e)
+		{
+			nudMinHoogte.Value = nudMaxHoogte.Value - 20;
 		}
 	}
 }

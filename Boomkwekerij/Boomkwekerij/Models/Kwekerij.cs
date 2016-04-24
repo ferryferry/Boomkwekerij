@@ -11,7 +11,7 @@ namespace Boomkwekerij.Models
 {
 	public sealed class Kwekerij
 	{
-		// Properties
+		#region Properties
 		public string Bedrijfsnaam { get; private set; }
 		public string Straat { get; private set; }
 		public string Postcode { get; private set; }
@@ -31,6 +31,7 @@ namespace Boomkwekerij.Models
 		public KlantRepository klantRepo { get; private set; }
 		public BestellingRepository bestellingRepo { get; private set; }
 		public PlantRepository plantRepo { get; private set; }
+		#endregion
 
 		#region Constructor
 		public Kwekerij(string bedrijfsnaam, string straat, string postcode, string plaats, string telefoonnummer, string faxnummer, string mobiel, string email, string iban, string btwNummer, string kvkNummer)
@@ -69,38 +70,90 @@ namespace Boomkwekerij.Models
 			}
 
 			// Initialialize Change Events in Observable Lists
-			Klanten.CollectionChanged += Klanten_CollectionChanged;
-			foreach (INotifyPropertyChanged klant in Klanten)
+			Klanten.CollectionChanged += ObservableListCollection_CollectionChanged;
+			foreach (Klant klant in Klanten)
 			{
 				klant.PropertyChanged += ItemPropertyChanged;
 			}
+
+			Planten.CollectionChanged += ObservableListCollection_CollectionChanged;
+			foreach (Plant plant in Planten)
+			{
+				plant.PropertyChanged += ItemPropertyChanged;
+				plant.Voorraad.PropertyChanged += ItemPropertyChanged;
+			}
+
+			Bestellingen.CollectionChanged += ObservableListCollection_CollectionChanged;
+			foreach (Bestelling bestelling in Bestellingen)
+			{
+				bestelling.PropertyChanged += ItemPropertyChanged;
+			}
 		}
+
 		#endregion
 
-		#region Klanten gewijzigd
-		private void Klanten_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		#region ObservableListCollection Collection Changed
+		private void ObservableListCollection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			if (e.NewItems != null)
 			{
-				foreach (Klant klant in e.NewItems)
+				foreach (object item in e.NewItems)
 				{
-					klantRepo.Insert(klant);
-					((INotifyPropertyChanged)klant).PropertyChanged += ItemPropertyChanged;
+					if (item is Plant || item is Voorraad)
+					{
+						((Plant)item).Voorraad.PropertyChanged += ItemPropertyChanged;
+						plantRepo.Insert((Plant)item);
+					}
+					else if(item is Klant)
+					{
+						klantRepo.Insert((Klant)item);
+					}
+					else if(item is Bestelling)
+					{
+						bestellingRepo.Insert((Bestelling)item);
+					}
+					((INotifyPropertyChanged)item).PropertyChanged += ItemPropertyChanged;
 				}
 			}
 			if (e.OldItems != null)
 			{
-				foreach (Klant klant in e.OldItems)
+				foreach (object item in e.OldItems)
 				{
-					klantRepo.Remove(klant);
-					((INotifyPropertyChanged)klant).PropertyChanged -= ItemPropertyChanged;
+					if (item is Plant)
+					{
+						plantRepo.Remove((Plant)item);
+					}
+					else if (item is Klant)
+					{
+						klantRepo.Remove((Klant)item);
+					}
+					else if (item is Bestelling)
+					{
+						bestellingRepo.Remove((Bestelling)item);
+					}
+					((INotifyPropertyChanged)item).PropertyChanged -= ItemPropertyChanged;
 				}
 			}
 		}
 
 		private void ItemPropertyChanged(object sender, PropertyChangedEventArgs e)
 		{
-			klantRepo.Update((Klant)sender);
+			if (sender is Plant)
+			{
+				plantRepo.Update((Plant)sender);
+			}
+			else if(sender is Voorraad)
+			{
+				plantRepo.Update((Voorraad)sender);
+			}
+			else if (sender is Klant)
+			{
+				klantRepo.Update((Klant)sender);
+			}
+			else if (sender is Bestelling)
+			{
+				bestellingRepo.Update((Bestelling)sender);
+			}
 		}
 		#endregion
 	}

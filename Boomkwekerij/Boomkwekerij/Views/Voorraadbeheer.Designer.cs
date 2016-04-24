@@ -34,15 +34,15 @@
 			this.tsmiDelete = new System.Windows.Forms.ToolStripMenuItem();
 			this.msVoorraadBeheer = new System.Windows.Forms.MenuStrip();
 			this.nieuwToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.lvVoorraad = new System.Windows.Forms.ListView();
-			this.label1 = new System.Windows.Forms.Label();
-			this.txtFilter = new System.Windows.Forms.TextBox();
 			this.plantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.lvVoorraad = new System.Windows.Forms.ListView();
 			this.chAantal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.chPlant = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.chGrootte = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.chJaren = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.chOpmerking = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.label1 = new System.Windows.Forms.Label();
+			this.txtFilter = new System.Windows.Forms.TextBox();
 			this.cmsVoorraad.SuspendLayout();
 			this.msVoorraadBeheer.SuspendLayout();
 			this.SuspendLayout();
@@ -53,19 +53,21 @@
             this.tsmiEdit,
             this.tsmiDelete});
 			this.cmsVoorraad.Name = "cmsKlant";
-			this.cmsVoorraad.Size = new System.Drawing.Size(123, 48);
+			this.cmsVoorraad.Size = new System.Drawing.Size(153, 70);
 			// 
 			// tsmiEdit
 			// 
 			this.tsmiEdit.Name = "tsmiEdit";
-			this.tsmiEdit.Size = new System.Drawing.Size(122, 22);
+			this.tsmiEdit.Size = new System.Drawing.Size(152, 22);
 			this.tsmiEdit.Text = "Bewerk";
+			this.tsmiEdit.Click += new System.EventHandler(this.tsmiEdit_Click);
 			// 
 			// tsmiDelete
 			// 
 			this.tsmiDelete.Name = "tsmiDelete";
-			this.tsmiDelete.Size = new System.Drawing.Size(122, 22);
+			this.tsmiDelete.Size = new System.Drawing.Size(152, 22);
 			this.tsmiDelete.Text = "Verwijder";
+			this.tsmiDelete.Click += new System.EventHandler(this.tsmiDelete_Click);
 			// 
 			// msVoorraadBeheer
 			// 
@@ -84,6 +86,13 @@
 			this.nieuwToolStripMenuItem.Name = "nieuwToolStripMenuItem";
 			this.nieuwToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
 			this.nieuwToolStripMenuItem.Text = "Nieuw";
+			// 
+			// plantToolStripMenuItem
+			// 
+			this.plantToolStripMenuItem.Name = "plantToolStripMenuItem";
+			this.plantToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+			this.plantToolStripMenuItem.Text = "Plant";
+			this.plantToolStripMenuItem.Click += new System.EventHandler(this.plantToolStripMenuItem_Click);
 			// 
 			// lvVoorraad
 			// 
@@ -106,31 +115,10 @@
 			this.lvVoorraad.TabIndex = 8;
 			this.lvVoorraad.UseCompatibleStateImageBehavior = false;
 			this.lvVoorraad.View = System.Windows.Forms.View.Details;
+			this.lvVoorraad.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvVoorraad_ColumnClick);
 			this.lvVoorraad.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvVoorraad_ItemSelectionChanged);
+			this.lvVoorraad.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvVoorraad_KeyDown);
 			this.lvVoorraad.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvVoorraad_MouseDoubleClick);
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 35);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(35, 13);
-			this.label1.TabIndex = 11;
-			this.label1.Text = "Zoek:";
-			// 
-			// txtFilter
-			// 
-			this.txtFilter.Location = new System.Drawing.Point(53, 32);
-			this.txtFilter.Name = "txtFilter";
-			this.txtFilter.Size = new System.Drawing.Size(158, 20);
-			this.txtFilter.TabIndex = 10;
-			this.txtFilter.TextChanged += new System.EventHandler(this.txtFilter_TextChanged);
-			// 
-			// plantToolStripMenuItem
-			// 
-			this.plantToolStripMenuItem.Name = "plantToolStripMenuItem";
-			this.plantToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.plantToolStripMenuItem.Text = "Plant";
 			// 
 			// chAantal
 			// 
@@ -156,6 +144,23 @@
 			// 
 			this.chOpmerking.Text = "Opmerking";
 			this.chOpmerking.Width = 373;
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(12, 35);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(35, 13);
+			this.label1.TabIndex = 11;
+			this.label1.Text = "Zoek:";
+			// 
+			// txtFilter
+			// 
+			this.txtFilter.Location = new System.Drawing.Point(53, 32);
+			this.txtFilter.Name = "txtFilter";
+			this.txtFilter.Size = new System.Drawing.Size(158, 20);
+			this.txtFilter.TabIndex = 10;
+			this.txtFilter.TextChanged += new System.EventHandler(this.txtFilter_TextChanged);
 			// 
 			// Voorraadbeheer
 			// 

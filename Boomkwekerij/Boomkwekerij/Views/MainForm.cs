@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Boomkwekerij.Models;
 using Boomkwekerij.Views;
+using Boomkwekerij.Models.Conversion;
 
 namespace Boomkwekerij
 {
@@ -69,7 +70,7 @@ namespace Boomkwekerij
 			lvPlantenInBestelling.Items.Clear();
 			foreach(Bestelregel bestelregel in geselecteerdeBestelling.Bestelregels)
 			{
-				ListViewItem item = new ListViewItem(new string[] { bestelregel.Plant.Naam, bestelregel.Aantal.ToString(), bestelregel.Prijs.ToString(), bestelregel.Plant.PlantGrootte.ToString(), bestelregel.Plant.Jaren(), bestelregel.Plant.Opmerking });
+				ListViewItem item = new ListViewItem(new string[] { bestelregel.Plant.Naam, bestelregel.Aantal.ToString(), bestelregel.Prijs.ToString(), EnumDescriptionConverter.GetDescriptionFromEnum(bestelregel.Plant.PlantGrootte), bestelregel.Plant.Jaren(), bestelregel.Plant.Opmerking });
 				item.Tag = bestelregel;
 				lvPlantenInBestelling.Items.Add(item);
 			}

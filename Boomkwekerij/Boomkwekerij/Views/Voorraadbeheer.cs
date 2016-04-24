@@ -3,13 +3,15 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Forms;
+using Boomkwekerij.Models.Conversion;
+using Boomkwekerij.Sorting;
 
 namespace Boomkwekerij.Views
 {
 	public partial class Voorraadbeheer : Form
 	{
 		private ObservableCollection<Plant> planten;
-		private SortOrder lvBestellingenSortOrder;
+		private SortOrder lvVoorraadSortOrder;
 		private Plant geselecteerdePlant;
 
 		public Voorraadbeheer(ObservableCollection<Plant> planten)
@@ -23,13 +25,13 @@ namespace Boomkwekerij.Views
 			lvVoorraad.Items.Clear();
 			foreach (Plant plant in planten.Where(p=> p.Naam.ToLower().Contains(txtFilter.Text.ToLower())))
 			{
-				ListViewItem item = new ListViewItem(new string[] { plant.Voorraad.Aantal.ToString() + " x", plant.Naam, plant.PlantGrootte.ToString(), plant.Jaren(), plant.Opmerking });
+				ListViewItem item = new ListViewItem(new string[] { plant.Voorraad.Aantal.ToString() + " x", plant.Naam, EnumDescriptionConverter.GetDescriptionFromEnum(plant.PlantGrootte), plant.Jaren(), plant.Opmerking });
 				item.Tag = plant;
 				lvVoorraad.Items.Add(item);
 			}
 			lvVoorraad.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
 			lvVoorraad.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-			lvBestellingenSortOrder = SortOrder.None;
+			lvVoorraadSortOrder = SortOrder.None;
 		}
 
 		private void Voorraadbeheer_Load(object sender, EventArgs e)
@@ -49,10 +51,63 @@ namespace Boomkwekerij.Views
 
 		private void lvVoorraad_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
+			showPlantEdit();
+		}
+
+		private void plantToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			PlantAddEdit plantEditForm = new PlantAddEdit(new Plant());
+			plantEditForm.ShowDialog();
+			if (plantEditForm.DialogResult == DialogResult.OK)
+			{
+				planten.Add(plantEditForm.Plant);
+				refreshView();
+			}
+		}
+
+		private void lvVoorraad_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter && lvVoorraad.SelectedItems.Count == 1)
+			{
+				showPlantEdit();
+			}
+		}
+
+		private void showPlantEdit()
+		{
 			PlantAddEdit plantEditForm = new PlantAddEdit(geselecteerdePlant);
 			plantEditForm.ShowDialog();
 			if (plantEditForm.DialogResult == DialogResult.OK)
 			{
+				refreshView();
+			}
+		}
+
+		private void lvVoorraad_ColumnClick(object sender, ColumnClickEventArgs e)
+		{
+			if (lvVoorraadSortOrder == SortOrder.None || lvVoorraadSortOrder == SortOrder.Ascending)
+			{
+				lvVoorraadSortOrder = SortOrder.Descending;
+			}
+			else
+			{
+				lvVoorraadSortOrder = SortOrder.Ascending;
+			}
+			lvVoorraad.ListViewItemSorter = new ListViewItemComparer(e.Column, lvVoorraadSortOrder);
+		}
+
+		private void tsmiEdit_Click(object sender, EventArgs e)
+		{
+			showPlantEdit();
+		}
+
+		private void tsmiDelete_Click(object sender, EventArgs e)
+		{
+			DialogResult result = MessageBox.Show("Weet u zeker dat u deze plant wilt verwijderen?\nDeze actie kan niet ongedaan worden gemaakt. Ook de voorraad wordt geleegd!", "Plant verwijderen", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+			if (result == DialogResult.OK)
+			{
+				planten.Remove(geselecteerdePlant);
+				geselecteerdePlant = null;
 				refreshView();
 			}
 		}

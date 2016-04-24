@@ -5,14 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Boomkwekerij.Models.Conversion;
+using System.Runtime.CompilerServices;
 
 namespace Boomkwekerij.Models
 {
-	public sealed class Plant
+	public sealed class Plant : INotifyPropertyChanged
 	{
+		#region Enums
 		public enum Grootte
 		{
-			[Description("10 - 20")]
+			[Description("0 - 20")]
 			G1020,
 			[Description("20 - 40")]
 			G2040,
@@ -35,13 +37,64 @@ namespace Boomkwekerij.Models
 			[Description("200 - 220")]
 			G200220
 		}
-		public int Id { get; set; }
-		public string Naam { get; set; }
-		public Grootte PlantGrootte { get; set; }
-		public int Zaailing { get; set; }
-		public int Verplant { get; set; }
-		public string Opmerking { get; set; }
-		public Voorraad Voorraad { get; set; }
+		#endregion
+
+		#region Properties
+		private int id;
+		public int Id
+		{
+			get { return id; }
+			set { SetField(ref id, value); }
+		}
+
+		private string naam;
+		public string Naam
+		{
+			get { return naam; }
+			set { SetField(ref naam, value); }
+		}
+
+		private Grootte plantGrootte;
+		public Plant.Grootte PlantGrootte
+		{
+			get { return plantGrootte; }
+			set { SetField(ref plantGrootte, value); }
+		}
+
+		private int zaailing;
+		public int Zaailing
+		{
+			get { return zaailing; }
+			set { SetField(ref zaailing, value); }
+		}
+
+		private int verplant;
+		public int Verplant
+		{
+			get { return verplant; }
+			set { SetField(ref verplant, value); }
+		}
+
+		private string opmerking;
+		public string Opmerking
+		{
+			get { return opmerking; }
+			set { SetField(ref opmerking, value); }
+		}
+
+		private Voorraad voorraad;
+		public Voorraad Voorraad
+		{
+			get { return voorraad; }
+			set { SetField(ref voorraad, value); }
+		}
+		#endregion
+
+		#region Constructors
+		public Plant()
+		{
+			Voorraad = new Voorraad(0, 0);
+		}
 
 		public Plant(int id)
 		{
@@ -58,7 +111,24 @@ namespace Boomkwekerij.Models
 			Opmerking = opmerking;
 			Voorraad = voorraad;
 		}
+		#endregion
 
+		#region PropertyChangedEvent
+		public event PropertyChangedEventHandler PropertyChanged;
+		private void OnPropertyChanged(string propertyName)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
+		private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+		{
+			if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+			field = value;
+			OnPropertyChanged(propertyName);
+			return true;
+		}
+		#endregion
+
+		#region Methods
 		public int MinHoogte()
 		{
 			return ConvertPlantGrootte.Convert(PlantGrootte)[0];
@@ -73,5 +143,6 @@ namespace Boomkwekerij.Models
 		{
 			return Zaailing.ToString() + " - " + Verplant.ToString();
 		}
+		#endregion
 	}
 }

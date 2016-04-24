@@ -54,6 +54,7 @@
     <Compile Include="Controllers\Contexts\KlantMemoryContext.cs" />
     <Compile Include="Controllers\Contexts\PlantMemoryContext.cs" />
     <Compile Include="Controllers\Interfaces\IContext.cs" />
+    <Compile Include="Controllers\Interfaces\IPlantContext.cs" />
     <Compile Include="Controllers\Repositories\BestellingRepository.cs" />
     <Compile Include="Controllers\Repositories\IRepository.cs" />
     <Compile Include="Controllers\Repositories\KlantRepository.cs" />
@@ -137,6 +138,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

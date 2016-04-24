@@ -77,7 +77,7 @@ namespace Boomkwekerij.Views
 		{
 			if (lvKlanten.FocusedItem.Bounds.Contains(e.Location))
 			{
-				ShowKlantEdit();
+				showKlantEdit();
 			}
 		}
 
@@ -93,12 +93,12 @@ namespace Boomkwekerij.Views
 				if (lvKlanten.Items.Count == 1)
 				{
 					lvKlanten.Items[0].Selected = true;
-					ShowKlantEdit();
+					showKlantEdit();
 				}
 			}
 		}
 
-		private void ShowKlantEdit()
+		private void showKlantEdit()
 		{
 			KlantAddEdit klantEditForm = new KlantAddEdit((Klant)lvKlanten.SelectedItems[0].Tag);
 			klantEditForm.ShowDialog();
@@ -137,7 +137,7 @@ namespace Boomkwekerij.Views
 		{
 			if(e.KeyCode == Keys.Enter && lvKlanten.SelectedItems.Count == 1)
 			{
-				ShowKlantEdit();
+				showKlantEdit();
 			}
 		}
 	}

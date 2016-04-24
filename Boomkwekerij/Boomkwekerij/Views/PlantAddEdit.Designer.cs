@@ -138,7 +138,7 @@
 			this.nudMinHoogte.Name = "nudMinHoogte";
 			this.nudMinHoogte.Size = new System.Drawing.Size(73, 20);
 			this.nudMinHoogte.TabIndex = 39;
-			this.nudMinHoogte.ValueChanged += new System.EventHandler(this.txtField_TextChanged);
+			this.nudMinHoogte.ValueChanged += new System.EventHandler(this.nudMinHoogte_ValueChanged);
 			this.nudMinHoogte.VisibleChanged += new System.EventHandler(this.txtField_TextChanged);
 			// 
 			// nudMaxHoogte
@@ -154,10 +154,20 @@
             0,
             0,
             0});
+			this.nudMaxHoogte.Minimum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
 			this.nudMaxHoogte.Name = "nudMaxHoogte";
 			this.nudMaxHoogte.Size = new System.Drawing.Size(73, 20);
 			this.nudMaxHoogte.TabIndex = 40;
-			this.nudMaxHoogte.ValueChanged += new System.EventHandler(this.txtField_TextChanged);
+			this.nudMaxHoogte.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+			this.nudMaxHoogte.ValueChanged += new System.EventHandler(this.nudMaxHoogte_ValueChanged);
 			this.nudMaxHoogte.VisibleChanged += new System.EventHandler(this.txtField_TextChanged);
 			// 
 			// label7
@@ -240,6 +250,7 @@
 			// 
 			// PlantAddEdit
 			// 
+			this.AcceptButton = this.btnSave;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;

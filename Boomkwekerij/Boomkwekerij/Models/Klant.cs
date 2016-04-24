@@ -10,21 +10,7 @@ namespace Boomkwekerij.Models
 {
 	public sealed class Klant : INotifyPropertyChanged
 	{
-		// boiler-plate
-		public event PropertyChangedEventHandler PropertyChanged;
-		private void OnPropertyChanged(string propertyName)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
-		private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
-		{
-			if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-			field = value;
-			OnPropertyChanged(propertyName);
-			return true;
-		}
-
-		// Properties
+		#region Properties
 		private int id;
 		public int Id
 		{
@@ -73,7 +59,9 @@ namespace Boomkwekerij.Models
 			get { return email; }
 			set { SetField(ref email, value); }
 		}
+#endregion
 
+		#region Constructors
 		public Klant()
 		{
 
@@ -94,10 +82,28 @@ namespace Boomkwekerij.Models
 			Telefoonnummer = telefoonnummer;
 			Email = email;
 		}
+		#endregion
 
+		#region PropertyChangedEvent
+		public event PropertyChangedEventHandler PropertyChanged;
+		private void OnPropertyChanged(string propertyName)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
+		private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+		{
+			if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+			field = value;
+			OnPropertyChanged(propertyName);
+			return true;
+		}
+		#endregion
+
+		#region Methods
 		public override string ToString()
 		{
 			return Naam;
 		}
+		#endregion
 	}
 }
