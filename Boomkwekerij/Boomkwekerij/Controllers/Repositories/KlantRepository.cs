@@ -9,16 +9,37 @@ using Boomkwekerij.Controllers.Contexts;
 
 namespace Boomkwekerij.Controllers.Repositories
 {
-	public class KlantRepository
+	public class KlantRepository : IRepository<Klant>
 	{
-		private IRepository<Klant> context;
-		public KlantRepository(IRepository<Klant> context)
+		private IContext<Klant> context;
+		public KlantRepository(IContext<Klant> context)
 		{
 			this.context = context;
 		}
-		public IEnumerable<Klant> GetAll()
+
+		public Klant Insert(Klant entity)
+		{
+			return context.Insert(entity);
+		}
+
+		public Klant Get(int id)
+		{
+			return context.Get(id);
+		}
+
+		public List<Klant> GetAll()
 		{
 			return context.GetAll();
+		}
+
+		public bool Remove(Klant entity)
+		{
+			return context.Remove(entity);
+		}
+
+		public bool Update(Klant entity)
+		{
+			return context.Update(entity);
 		}
 	}
 }

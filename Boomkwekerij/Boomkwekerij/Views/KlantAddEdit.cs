@@ -82,6 +82,7 @@ namespace Boomkwekerij.Views
 		private void txtField_TextChanged(object sender, EventArgs e)
 		{
 			epFields.Clear();
+			errorCount = 0;
 		}
 	}
 }

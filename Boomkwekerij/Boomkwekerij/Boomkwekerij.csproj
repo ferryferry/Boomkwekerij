@@ -50,12 +50,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Contexts\BestellingMemoryContext.cs" />
     <Compile Include="Controllers\Contexts\KlantMemoryContext.cs" />
-    <Compile Include="Controllers\Interfaces\IKlantContext.cs" />
-    <Compile Include="Controllers\Interfaces\IRepository.cs" />
+    <Compile Include="Controllers\Contexts\PlantMemoryContext.cs" />
+    <Compile Include="Controllers\Interfaces\IContext.cs" />
+    <Compile Include="Controllers\Repositories\BestellingRepository.cs" />
+    <Compile Include="Controllers\Repositories\IRepository.cs" />
     <Compile Include="Controllers\Repositories\KlantRepository.cs" />
+    <Compile Include="Controllers\Repositories\PlantRepository.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Exceptions\DatabaseCouldNotBeFoundException.cs" />
+    <Compile Include="Models\Bestelregel.cs" />
+    <Compile Include="Models\Conversion\ConvertPlantGrootte.cs" />
+    <Compile Include="Models\Conversion\EnumDescriptionConverter.cs" />
+    <Compile Include="Models\ToeslagPercentage.cs" />
     <Compile Include="Sorting\ListViewItemComparer.cs" />
     <Compile Include="Views\KlantAddEdit.cs">
       <SubType>Form</SubType>
@@ -83,6 +91,18 @@
     <Compile Include="Models\Voorraad.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\PlantAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PlantAddEdit.Designer.cs">
+      <DependentUpon>PlantAddEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Voorraadbeheer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Voorraadbeheer.Designer.cs">
+      <DependentUpon>Voorraadbeheer.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Views\KlantAddEdit.resx">
       <DependentUpon>KlantAddEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -101,6 +121,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\PlantAddEdit.resx">
+      <DependentUpon>PlantAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Voorraadbeheer.resx">
+      <DependentUpon>Voorraadbeheer.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="boomkwekerij_database.db" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -118,6 +144,7 @@
   <ItemGroup>
     <Content Include="Dynamic Link Libraries\System.Data.SQLite.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

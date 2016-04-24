@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Boomkwekerij.Models;
 
 namespace Boomkwekerij.Controllers.Interfaces
 {
-	public interface IKlantContext : IRepository<Klant>
+	public interface IContext<T>
 	{
+		T Insert(T entity);
 
+		T Get(int id);
+
+		List<T> GetAll();
+
+		bool Remove(T entity);
+
+		bool Update(T entity);
 	}
 }

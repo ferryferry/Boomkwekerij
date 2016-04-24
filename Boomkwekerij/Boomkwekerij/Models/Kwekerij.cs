@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Boomkwekerij.Controllers.Repositories;
 using Boomkwekerij.Controllers.Contexts;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Linq;
 
 namespace Boomkwekerij.Models
 {
@@ -23,15 +24,18 @@ namespace Boomkwekerij.Models
 		public string BtwNummer { get; private set; }
 		public string KvkNummer { get; private set; }
 
-		public List<Klant> Klanten { get; private set; }
-		public List<Voorraad> Voorraadlijst { get; private set; }
-		public List<Bestelling> Bestellingen { get; private set; }
+		public ObservableCollection<Klant> Klanten { get; private set; }
+		public ObservableCollection<Plant> Planten { get; private set; }
+		public ObservableCollection<Bestelling> Bestellingen { get; private set; }
 
 		public KlantRepository klantRepo { get; private set; }
+		public BestellingRepository bestellingRepo { get; private set; }
+		public PlantRepository plantRepo { get; private set; }
 
-		// Constructor
+		#region Constructor
 		public Kwekerij(string bedrijfsnaam, string straat, string postcode, string plaats, string telefoonnummer, string faxnummer, string mobiel, string email, string iban, string btwNummer, string kvkNummer)
 		{
+			// Initialize Properties
 			Bedrijfsnaam = bedrijfsnaam;
 			Straat = straat;
 			Postcode = postcode;
@@ -44,14 +48,60 @@ namespace Boomkwekerij.Models
 			BtwNummer = btwNummer;
 			KvkNummer = kvkNummer;
 
+			// Initialize Repositories with Contexts
 			klantRepo = new KlantRepository(new KlantMemoryContext());
+			bestellingRepo = new BestellingRepository(new BestellingMemoryContext());
+			plantRepo = new PlantRepository(new PlantMemoryContext());
 
-			Klanten = new List<Klant>();
-			Voorraadlijst = new List<Voorraad>();
-			Bestellingen = new List<Bestelling>();
+			// Initialize Lists
+			Klanten = new ObservableCollection<Klant>(klantRepo.GetAll());
+			Planten = new ObservableCollection<Plant>(plantRepo.GetAll());
+			Bestellingen = new ObservableCollection<Bestelling>(bestellingRepo.GetAll());
 
+			// Bind
+			foreach(Bestelling bestelling in Bestellingen)
+			{
+				bestelling.Klant = Klanten.Single(k=>k.Id == bestelling.Klant.Id);
+				foreach(Bestelregel bestelregel in bestelling.Bestelregels)
+				{
+					bestelregel.Plant = Planten.Single(p => p.Id == bestelregel.Plant.Id);
+				}
+			}
 
-			Klanten = klantRepo.GetAll().ToList();
+			// Initialialize Change Events in Observable Lists
+			Klanten.CollectionChanged += Klanten_CollectionChanged;
+			foreach (INotifyPropertyChanged klant in Klanten)
+			{
+				klant.PropertyChanged += ItemPropertyChanged;
+			}
 		}
+		#endregion
+
+		#region Klanten gewijzigd
+		private void Klanten_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			if (e.NewItems != null)
+			{
+				foreach (Klant klant in e.NewItems)
+				{
+					klantRepo.Insert(klant);
+					((INotifyPropertyChanged)klant).PropertyChanged += ItemPropertyChanged;
+				}
+			}
+			if (e.OldItems != null)
+			{
+				foreach (Klant klant in e.OldItems)
+				{
+					klantRepo.Remove(klant);
+					((INotifyPropertyChanged)klant).PropertyChanged -= ItemPropertyChanged;
+				}
+			}
+		}
+
+		private void ItemPropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			klantRepo.Update((Klant)sender);
+		}
+		#endregion
 	}
 }

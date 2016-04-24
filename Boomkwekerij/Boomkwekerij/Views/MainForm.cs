@@ -16,6 +16,9 @@ namespace Boomkwekerij
 	public partial class MainForm : Form
 	{
 		private Kwekerij kwekerij;
+		private SortOrder lvBestellingenSortOrder;
+		private Bestelling geselecteerdeBestelling;
+
 		public MainForm()
 		{
 			InitializeComponent();
@@ -43,12 +46,86 @@ namespace Boomkwekerij
 			//		}
 			//	}
 			//}
+			refreshMainView();
+		}
+
+		
+		private void refreshMainView()
+		{
+			lvBestellingen.Items.Clear();
+			foreach (Bestelling bestelling in kwekerij.Bestellingen)
+			{
+				ListViewItem item = new ListViewItem(new string[] { bestelling.Id.ToString(), bestelling.Besteldatum.ToString(), bestelling.Klant.Naam, bestelling.Factuurdatum.ToString(), bestelling.LaatstAfgedrukt.ToString(), bestelling.ToeslagPercentage.ToString(), bestelling.Betaald ? "Ja" : "Nee" });
+				item.Tag = bestelling;
+				lvBestellingen.Items.Add(item);
+			}
+			lvBestellingen.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+			lvBestellingen.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+			lvBestellingenSortOrder = SortOrder.None;
+		}
+
+		private void refreshGeselecteerdeBestellingInformatie()
+		{
+			lvPlantenInBestelling.Items.Clear();
+			foreach(Bestelregel bestelregel in geselecteerdeBestelling.Bestelregels)
+			{
+				ListViewItem item = new ListViewItem(new string[] { bestelregel.Plant.Naam, bestelregel.Aantal.ToString(), bestelregel.Prijs.ToString(), bestelregel.Plant.PlantGrootte.ToString(), bestelregel.Plant.Jaren(), bestelregel.Plant.Opmerking });
+				item.Tag = bestelregel;
+				lvPlantenInBestelling.Items.Add(item);
+			}
+			lvPlantenInBestelling.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+			lvPlantenInBestelling.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 		}
 
 		private void klantenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Klantbeheer klantBeheer = new Klantbeheer(kwekerij.Klanten);
 			klantBeheer.ShowDialog();
+		}
+
+		private void lvBestellingen_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+		{
+			geselecteerdeBestelling = (Bestelling)e.Item.Tag;
+			refreshGeselecteerdeBestellingInformatie();
+		}
+
+		private void lvPlantenInBestelling_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+		{
+			lvLeveringen.Items.Clear();
+			if(lvPlantenInBestelling.SelectedItems.Count > 0)
+			{
+				Bestelregel bestelregel = (Bestelregel)lvPlantenInBestelling.SelectedItems[0].Tag;
+				if (bestelregel.Leveringen != null)
+				{
+					foreach (Levering levering in bestelregel.Leveringen)
+					{
+						ListViewItem item = new ListViewItem(new string[] { levering.Aantal.ToString() + " x", levering.Leverdatum.ToString(), levering.Geleverd ? "Ja" : "Nee" });
+						item.Tag = levering;
+						lvLeveringen.Items.Add(item);
+					}
+					gbLeveringen.Enabled = true;
+				}
+				else
+				{
+					gbLeveringen.Enabled = false;
+				}
+			}
+		}
+
+		private void klantToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			KlantAddEdit klantEditForm = new KlantAddEdit(new Klant());
+			klantEditForm.ShowDialog();
+			if (klantEditForm.DialogResult == DialogResult.OK)
+			{
+				kwekerij.Klanten.Add(klantEditForm.Klant);
+			}
+		}
+
+		private void voorraadToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Voorraadbeheer voorraadBeheerForm = new Voorraadbeheer(kwekerij.Planten);
+			voorraadBeheerForm.ShowDialog();
 		}
 	}
 }

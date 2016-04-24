@@ -108,6 +108,7 @@
             this.chWoonplaats,
             this.chTelefoonnummer,
             this.chEmail});
+			this.lvKlanten.ContextMenuStrip = this.cmsKlant;
 			this.lvKlanten.FullRowSelect = true;
 			this.lvKlanten.Location = new System.Drawing.Point(0, 58);
 			this.lvKlanten.Name = "lvKlanten";

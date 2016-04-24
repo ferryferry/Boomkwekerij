@@ -4,16 +4,17 @@ using System.Windows.Forms;
 using Boomkwekerij.Models;
 using System.Linq;
 using Boomkwekerij.Sorting;
+using System.Collections.ObjectModel;
 
 namespace Boomkwekerij.Views
 {
     public partial class Klantbeheer: Form
     {
-		private List<Klant> Klanten;
+		private ObservableCollection<Klant> Klanten;
 		private Klant geselecteerdeKlant;
 		private SortOrder lvKlantenSortOrder;
 
-        public Klantbeheer(List<Klant> klanten)
+        public Klantbeheer(ObservableCollection<Klant> klanten)
         {
             InitializeComponent();
 			Klanten = klanten;
@@ -21,10 +22,10 @@ namespace Boomkwekerij.Views
 
 		private void Klantbeheer_Load(object sender, EventArgs e)
 		{
-			RefreshView();
+			refreshView();
 		}
 
-		private void RefreshView()
+		private void refreshView()
 		{
 			lvKlanten.Items.Clear();
 			foreach (Klant klant in Klanten.Where(k => k.Naam.ToLower().Contains(txtFilter.Text.ToLower()) || k.Plaats.ToLower().Contains(txtFilter.Text) || k.Postcode.ToLower().Contains(txtFilter.Text) || k.Email.ToLower().Contains(txtFilter.Text) || k.Adres.ToLower().Contains(txtFilter.Text) || k.Telefoonnummer.ToLower().Contains(txtFilter.Text)))
@@ -52,7 +53,7 @@ namespace Boomkwekerij.Views
 			klantEditForm.ShowDialog();
 			if(klantEditForm.DialogResult == DialogResult.OK)
 			{
-				RefreshView();
+				refreshView();
 			}
 		}
 
@@ -68,7 +69,7 @@ namespace Boomkwekerij.Views
 			{
 				Klanten.Remove(geselecteerdeKlant);
 				geselecteerdeKlant = null;
-				RefreshView();
+				refreshView();
 			}
 		}
 
@@ -82,7 +83,7 @@ namespace Boomkwekerij.Views
 
 		private void txtFilter_TextChanged(object sender, EventArgs e)
 		{
-			RefreshView();
+			refreshView();
 		}
 
 		private void txtFilter_KeyDown(object sender, KeyEventArgs e)
@@ -103,7 +104,7 @@ namespace Boomkwekerij.Views
 			klantEditForm.ShowDialog();
 			if (klantEditForm.DialogResult == DialogResult.OK)
 			{
-				RefreshView();
+				refreshView();
 			}
 		}
 
@@ -114,7 +115,7 @@ namespace Boomkwekerij.Views
 			if (klantEditForm.DialogResult == DialogResult.OK)
 			{
 				Klanten.Add(klantEditForm.Klant);
-				RefreshView();
+				refreshView();
 			}
 		}
 
