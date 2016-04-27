@@ -143,6 +143,20 @@ namespace Boomkwekerij.Models
 		{
 			return Zaailing.ToString() + " - " + Verplant.ToString();
 		}
+
+		public bool CheckVoorraad(int aantal)
+		{
+			if(Voorraad.Aantal >= aantal)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		public override string ToString()
+		{
+			return Naam;
+		}
 		#endregion
 	}
 }

@@ -66,6 +66,12 @@
     <Compile Include="Models\Conversion\EnumDescriptionConverter.cs" />
     <Compile Include="Models\ToeslagPercentage.cs" />
     <Compile Include="Sorting\ListViewItemComparer.cs" />
+    <Compile Include="Views\BestellingAddEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\BestellingAddEdit.Designer.cs">
+      <DependentUpon>BestellingAddEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\KlantAddEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +110,9 @@
     <Compile Include="Views\Voorraadbeheer.Designer.cs">
       <DependentUpon>Voorraadbeheer.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\BestellingAddEdit.resx">
+      <DependentUpon>BestellingAddEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\KlantAddEdit.resx">
       <DependentUpon>KlantAddEdit.cs</DependentUpon>
     </EmbeddedResource>

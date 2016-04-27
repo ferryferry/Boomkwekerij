@@ -122,6 +122,7 @@ namespace Boomkwekerij.Models
 					if (item is Plant)
 					{
 						plantRepo.Remove((Plant)item);
+						((Plant)item).Voorraad.PropertyChanged -= ItemPropertyChanged;
 					}
 					else if (item is Klant)
 					{

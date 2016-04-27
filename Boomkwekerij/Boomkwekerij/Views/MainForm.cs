@@ -128,5 +128,15 @@ namespace Boomkwekerij
 			Voorraadbeheer voorraadBeheerForm = new Voorraadbeheer(kwekerij.Planten);
 			voorraadBeheerForm.ShowDialog();
 		}
+
+		private void bestellingToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			BestellingAddEdit bestellingAddForm = new BestellingAddEdit(new Bestelling(), kwekerij.Planten);
+			bestellingAddForm.ShowDialog();
+			if (bestellingAddForm.DialogResult == DialogResult.OK)
+			{
+				kwekerij.Bestellingen.Add(bestellingAddForm.Bestelling);
+			}
+		}
 	}
 }

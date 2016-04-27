@@ -22,15 +22,17 @@ namespace Boomkwekerij.Models
 		}
 		#endregion
 
+		#region Constructors
 		public Voorraad(int id, int aantal)
 		{
 			Id = id;
 			Aantal = aantal;
 		}
+		#endregion
 
 		#region PropertyChangedEvent
 		public event PropertyChangedEventHandler PropertyChanged;
-		private void OnPropertyChanged(string propertyName)
+		private void onPropertyChanged(string propertyName)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
@@ -38,7 +40,7 @@ namespace Boomkwekerij.Models
 		{
 			if (EqualityComparer<T>.Default.Equals(field, value)) return false;
 			field = value;
-			OnPropertyChanged(propertyName);
+			onPropertyChanged(propertyName);
 			return true;
 		}
 		#endregion

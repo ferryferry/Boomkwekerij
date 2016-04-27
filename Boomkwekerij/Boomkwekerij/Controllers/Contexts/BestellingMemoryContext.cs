@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Boomkwekerij.Models;
 using Boomkwekerij.Controllers.Interfaces;
 using System.Linq.Expressions;
+using System.Collections.ObjectModel;
 
 namespace Boomkwekerij.Controllers.Contexts
 {
@@ -19,7 +20,7 @@ namespace Boomkwekerij.Controllers.Contexts
 			bestellingen.Add(new Bestelling(1,DateTime.Now.AddDays(-4), DateTime.Now.AddDays(-1), DateTime.Now, new ToeslagPercentage(0, 571, DateTime.Now.AddDays(-12)), false, new Klant(1), new List<Bestelregel>()
 			{
 				new Bestelregel(1, new Plant(1), 40, 45,
-				new List<Levering>()
+				new ObservableCollection<Levering>()
 				{
 					new Levering(1,20,DateTime.Now.AddDays(-2), true),
 					new Levering(2,20,DateTime.Now, true)

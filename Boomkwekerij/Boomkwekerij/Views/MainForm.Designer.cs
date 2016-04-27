@@ -30,8 +30,13 @@
 		{
 			this.msMain = new System.Windows.Forms.MenuStrip();
 			this.bestandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.nieuwToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.bestellingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.klantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.plantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.beheerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.klantenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.voorraadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.lvBestellingen = new System.Windows.Forms.ListView();
 			this.chBestelnummer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.chBesteldatum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -43,6 +48,12 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.txtFilter = new System.Windows.Forms.TextBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.gbLeveringen = new System.Windows.Forms.GroupBox();
+			this.lvLeveringen = new System.Windows.Forms.ListView();
+			this.chAantalGeleverd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.chLeverdatum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.chLeverstatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.lvPlantenInBestelling = new System.Windows.Forms.ListView();
 			this.chPlant = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.chAantal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -50,21 +61,10 @@
 			this.chGrootte = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.chJaren = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.chOpmerking = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.lvLeveringen = new System.Windows.Forms.ListView();
-			this.chAantalGeleverd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.chLeverdatum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.chLeverstatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.gbLeveringen = new System.Windows.Forms.GroupBox();
-			this.nieuwToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.bestellingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.klantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.plantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.voorraadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.msMain.SuspendLayout();
 			this.groupBox1.SuspendLayout();
-			this.groupBox2.SuspendLayout();
 			this.gbLeveringen.SuspendLayout();
+			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// msMain
@@ -86,6 +86,36 @@
 			this.bestandToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
 			this.bestandToolStripMenuItem.Text = "Bestand";
 			// 
+			// nieuwToolStripMenuItem
+			// 
+			this.nieuwToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bestellingToolStripMenuItem,
+            this.klantToolStripMenuItem,
+            this.plantToolStripMenuItem});
+			this.nieuwToolStripMenuItem.Name = "nieuwToolStripMenuItem";
+			this.nieuwToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.nieuwToolStripMenuItem.Text = "Nieuw";
+			// 
+			// bestellingToolStripMenuItem
+			// 
+			this.bestellingToolStripMenuItem.Name = "bestellingToolStripMenuItem";
+			this.bestellingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.bestellingToolStripMenuItem.Text = "Bestelling";
+			this.bestellingToolStripMenuItem.Click += new System.EventHandler(this.bestellingToolStripMenuItem_Click);
+			// 
+			// klantToolStripMenuItem
+			// 
+			this.klantToolStripMenuItem.Name = "klantToolStripMenuItem";
+			this.klantToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.klantToolStripMenuItem.Text = "Klant";
+			this.klantToolStripMenuItem.Click += new System.EventHandler(this.klantToolStripMenuItem_Click);
+			// 
+			// plantToolStripMenuItem
+			// 
+			this.plantToolStripMenuItem.Name = "plantToolStripMenuItem";
+			this.plantToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.plantToolStripMenuItem.Text = "Plant";
+			// 
 			// beheerToolStripMenuItem
 			// 
 			this.beheerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -101,6 +131,13 @@
 			this.klantenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.klantenToolStripMenuItem.Text = "Klanten";
 			this.klantenToolStripMenuItem.Click += new System.EventHandler(this.klantenToolStripMenuItem_Click);
+			// 
+			// voorraadToolStripMenuItem
+			// 
+			this.voorraadToolStripMenuItem.Name = "voorraadToolStripMenuItem";
+			this.voorraadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.voorraadToolStripMenuItem.Text = "Voorraad";
+			this.voorraadToolStripMenuItem.Click += new System.EventHandler(this.voorraadToolStripMenuItem_Click);
 			// 
 			// lvBestellingen
 			// 
@@ -188,6 +225,60 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Geselecteerde bestelling informatie";
 			// 
+			// gbLeveringen
+			// 
+			this.gbLeveringen.Controls.Add(this.lvLeveringen);
+			this.gbLeveringen.Location = new System.Drawing.Point(675, 19);
+			this.gbLeveringen.Name = "gbLeveringen";
+			this.gbLeveringen.Size = new System.Drawing.Size(191, 248);
+			this.gbLeveringen.TabIndex = 15;
+			this.gbLeveringen.TabStop = false;
+			this.gbLeveringen.Text = "Leveringen";
+			// 
+			// lvLeveringen
+			// 
+			this.lvLeveringen.AllowColumnReorder = true;
+			this.lvLeveringen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.lvLeveringen.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chAantalGeleverd,
+            this.chLeverdatum,
+            this.chLeverstatus});
+			this.lvLeveringen.FullRowSelect = true;
+			this.lvLeveringen.Location = new System.Drawing.Point(6, 19);
+			this.lvLeveringen.Name = "lvLeveringen";
+			this.lvLeveringen.Size = new System.Drawing.Size(179, 223);
+			this.lvLeveringen.Sorting = System.Windows.Forms.SortOrder.Ascending;
+			this.lvLeveringen.TabIndex = 13;
+			this.lvLeveringen.UseCompatibleStateImageBehavior = false;
+			this.lvLeveringen.View = System.Windows.Forms.View.Details;
+			// 
+			// chAantalGeleverd
+			// 
+			this.chAantalGeleverd.Text = "Aantal";
+			this.chAantalGeleverd.Width = 42;
+			// 
+			// chLeverdatum
+			// 
+			this.chLeverdatum.Text = "Leverdatum";
+			this.chLeverdatum.Width = 68;
+			// 
+			// chLeverstatus
+			// 
+			this.chLeverstatus.Text = "Afgeleverd";
+			this.chLeverstatus.Width = 292;
+			// 
+			// groupBox2
+			// 
+			this.groupBox2.Controls.Add(this.lvPlantenInBestelling);
+			this.groupBox2.Location = new System.Drawing.Point(6, 19);
+			this.groupBox2.Name = "groupBox2";
+			this.groupBox2.Size = new System.Drawing.Size(663, 248);
+			this.groupBox2.TabIndex = 14;
+			this.groupBox2.TabStop = false;
+			this.groupBox2.Text = "Producten in bestelling";
+			// 
 			// lvPlantenInBestelling
 			// 
 			this.lvPlantenInBestelling.AllowColumnReorder = true;
@@ -242,96 +333,6 @@
 			this.chOpmerking.Text = "Opmerking";
 			this.chOpmerking.Width = 138;
 			// 
-			// lvLeveringen
-			// 
-			this.lvLeveringen.AllowColumnReorder = true;
-			this.lvLeveringen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.lvLeveringen.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chAantalGeleverd,
-            this.chLeverdatum,
-            this.chLeverstatus});
-			this.lvLeveringen.FullRowSelect = true;
-			this.lvLeveringen.Location = new System.Drawing.Point(6, 19);
-			this.lvLeveringen.Name = "lvLeveringen";
-			this.lvLeveringen.Size = new System.Drawing.Size(179, 223);
-			this.lvLeveringen.Sorting = System.Windows.Forms.SortOrder.Ascending;
-			this.lvLeveringen.TabIndex = 13;
-			this.lvLeveringen.UseCompatibleStateImageBehavior = false;
-			this.lvLeveringen.View = System.Windows.Forms.View.Details;
-			// 
-			// chAantalGeleverd
-			// 
-			this.chAantalGeleverd.Text = "Aantal";
-			this.chAantalGeleverd.Width = 42;
-			// 
-			// chLeverdatum
-			// 
-			this.chLeverdatum.Text = "Leverdatum";
-			this.chLeverdatum.Width = 68;
-			// 
-			// chLeverstatus
-			// 
-			this.chLeverstatus.Text = "Afgeleverd";
-			this.chLeverstatus.Width = 292;
-			// 
-			// groupBox2
-			// 
-			this.groupBox2.Controls.Add(this.lvPlantenInBestelling);
-			this.groupBox2.Location = new System.Drawing.Point(6, 19);
-			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(663, 248);
-			this.groupBox2.TabIndex = 14;
-			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "Producten in bestelling";
-			// 
-			// gbLeveringen
-			// 
-			this.gbLeveringen.Controls.Add(this.lvLeveringen);
-			this.gbLeveringen.Location = new System.Drawing.Point(675, 19);
-			this.gbLeveringen.Name = "gbLeveringen";
-			this.gbLeveringen.Size = new System.Drawing.Size(191, 248);
-			this.gbLeveringen.TabIndex = 15;
-			this.gbLeveringen.TabStop = false;
-			this.gbLeveringen.Text = "Leveringen";
-			// 
-			// nieuwToolStripMenuItem
-			// 
-			this.nieuwToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bestellingToolStripMenuItem,
-            this.klantToolStripMenuItem,
-            this.plantToolStripMenuItem});
-			this.nieuwToolStripMenuItem.Name = "nieuwToolStripMenuItem";
-			this.nieuwToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.nieuwToolStripMenuItem.Text = "Nieuw";
-			// 
-			// bestellingToolStripMenuItem
-			// 
-			this.bestellingToolStripMenuItem.Name = "bestellingToolStripMenuItem";
-			this.bestellingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.bestellingToolStripMenuItem.Text = "Bestelling";
-			// 
-			// klantToolStripMenuItem
-			// 
-			this.klantToolStripMenuItem.Name = "klantToolStripMenuItem";
-			this.klantToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.klantToolStripMenuItem.Text = "Klant";
-			this.klantToolStripMenuItem.Click += new System.EventHandler(this.klantToolStripMenuItem_Click);
-			// 
-			// plantToolStripMenuItem
-			// 
-			this.plantToolStripMenuItem.Name = "plantToolStripMenuItem";
-			this.plantToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.plantToolStripMenuItem.Text = "Plant";
-			// 
-			// voorraadToolStripMenuItem
-			// 
-			this.voorraadToolStripMenuItem.Name = "voorraadToolStripMenuItem";
-			this.voorraadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.voorraadToolStripMenuItem.Text = "Voorraad";
-			this.voorraadToolStripMenuItem.Click += new System.EventHandler(this.voorraadToolStripMenuItem_Click);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -349,8 +350,8 @@
 			this.msMain.ResumeLayout(false);
 			this.msMain.PerformLayout();
 			this.groupBox1.ResumeLayout(false);
-			this.groupBox2.ResumeLayout(false);
 			this.gbLeveringen.ResumeLayout(false);
+			this.groupBox2.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
