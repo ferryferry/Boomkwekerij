@@ -228,6 +228,7 @@
 			// gbLeveringen
 			// 
 			this.gbLeveringen.Controls.Add(this.lvLeveringen);
+			this.gbLeveringen.Enabled = false;
 			this.gbLeveringen.Location = new System.Drawing.Point(675, 19);
 			this.gbLeveringen.Name = "gbLeveringen";
 			this.gbLeveringen.Size = new System.Drawing.Size(191, 248);

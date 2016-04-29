@@ -10,8 +10,8 @@ namespace Boomkwekerij.Controllers.Repositories
 {
 	public sealed class PlantRepository  : IRepository<Plant>
 	{
-		private IPlantContext context;
-		public PlantRepository(IPlantContext context)
+		private IContext<Plant> context;
+		public PlantRepository(IContext<Plant> context)
 		{
 			this.context = context;
 		}
@@ -40,11 +40,5 @@ namespace Boomkwekerij.Controllers.Repositories
 		{
 			return context.Update(entity);
 		}
-
-		public bool Update(Voorraad voorraad)
-		{
-			return context.Update(voorraad);
-		}
-
 	}
 }

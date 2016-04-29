@@ -55,7 +55,6 @@
     <Compile Include="Controllers\Contexts\PlantMemoryContext.cs" />
     <Compile Include="Controllers\Contexts\TestData.cs" />
     <Compile Include="Controllers\Interfaces\IContext.cs" />
-    <Compile Include="Controllers\Interfaces\IPlantContext.cs" />
     <Compile Include="Controllers\Repositories\BestellingRepository.cs" />
     <Compile Include="Controllers\Repositories\IRepository.cs" />
     <Compile Include="Controllers\Repositories\KlantRepository.cs" />
@@ -96,7 +95,6 @@
     <Compile Include="Models\Klant.cs" />
     <Compile Include="Models\Levering.cs" />
     <Compile Include="Models\Plant.cs" />
-    <Compile Include="Models\Voorraad.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\PlantAddEdit.cs">

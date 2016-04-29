@@ -33,7 +33,7 @@ namespace Boomkwekerij.Views
 
 			txtNaam.Text = Plant.Naam;
 			txtOpmerking.Text = Plant.Opmerking;
-			nudAantal.Value = Plant.Voorraad.Aantal;
+			nudAantal.Value = Plant.Voorraad;
 
 			int[] plantGrootte = ConvertPlantGrootte.Convert(Plant.PlantGrootte);
 
@@ -53,7 +53,7 @@ namespace Boomkwekerij.Views
 				Plant.PlantGrootte = ConvertPlantGrootte.Convert(Convert.ToInt32(nudMinHoogte.Value), Convert.ToInt32(nudMaxHoogte.Value));
 				Plant.Zaailing = Convert.ToInt32(nudJaarling.Value);
 				Plant.Verplant = Convert.ToInt32(nudVerplant.Value);
-				Plant.Voorraad.Aantal = Convert.ToInt32(nudAantal.Value);
+				Plant.Voorraad = Convert.ToInt32(nudAantal.Value);
 				DialogResult = DialogResult.OK;
 			}
 		}

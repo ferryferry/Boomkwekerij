@@ -75,33 +75,28 @@ namespace Boomkwekerij.Models
 			set { SetField(ref verplant, value); }
 		}
 
+		private int voorraad;
+		public int Voorraad
+		{
+			get { return voorraad; }
+			set { SetField(ref voorraad, value); }
+		}
+
 		private string opmerking;
 		public string Opmerking
 		{
 			get { return opmerking; }
 			set { SetField(ref opmerking, value); }
 		}
-
-		private Voorraad voorraad;
-		public Voorraad Voorraad
-		{
-			get { return voorraad; }
-			set { SetField(ref voorraad, value); }
-		}
 		#endregion
 
 		#region Constructors
-		public Plant()
-		{
-			Voorraad = new Voorraad(0, 0);
-		}
-
 		public Plant(int id)
 		{
 			Id = id;
 		}
 
-		public Plant(int id, string naam, Grootte plantGrootte, int zaailing, int verplant, string opmerking, Voorraad voorraad)
+		public Plant(int id, string naam, Grootte plantGrootte, int zaailing, int verplant, string opmerking, int voorraad)
 		{
 			Id = id;
 			Naam = naam;
@@ -146,7 +141,7 @@ namespace Boomkwekerij.Models
 
 		public bool CheckVoorraad(int aantal)
 		{
-			if(Voorraad.Aantal >= aantal)
+			if(Voorraad >= aantal)
 			{
 				return true;
 			}
@@ -157,7 +152,7 @@ namespace Boomkwekerij.Models
 		{
 			if (CheckVoorraad(aantal))
 			{
-				voorraad.Aantal -= aantal;
+				Voorraad -= aantal;
 				if (bestelregels.Exists(br => br.Plant.Id == Id))
 				{
 					Bestelregel bestelregel = bestelregels.Single(br => br.Plant.Id == Id);

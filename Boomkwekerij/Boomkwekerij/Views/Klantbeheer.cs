@@ -34,8 +34,6 @@ namespace Boomkwekerij.Views
 				item.Tag = klant;
 				lvKlanten.Items.Add(item);
 			}
-			lvKlanten.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-			lvKlanten.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 			lvKlantenSortOrder = SortOrder.None;
 		}
 

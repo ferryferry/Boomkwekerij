@@ -38,7 +38,7 @@
 			this.chLeeftijd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.chOpmerking = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.btnPlaatsBestelling = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
+			this.btnCancel = new System.Windows.Forms.Button();
 			this.cmsPlantenVoorBestelling = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toevoegenAanBestellingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.lblGeselecteerdePlant = new System.Windows.Forms.Label();
@@ -152,14 +152,15 @@
 			this.btnPlaatsBestelling.UseVisualStyleBackColor = true;
 			this.btnPlaatsBestelling.Click += new System.EventHandler(this.btnPlaatsBestelling_Click);
 			// 
-			// button2
+			// btnCancel
 			// 
-			this.button2.Location = new System.Drawing.Point(12, 600);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(111, 23);
-			this.button2.TabIndex = 19;
-			this.button2.Text = "Annuleer";
-			this.button2.UseVisualStyleBackColor = true;
+			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.btnCancel.Location = new System.Drawing.Point(12, 600);
+			this.btnCancel.Name = "btnCancel";
+			this.btnCancel.Size = new System.Drawing.Size(111, 23);
+			this.btnCancel.TabIndex = 19;
+			this.btnCancel.Text = "Annuleer";
+			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
 			// cmsPlantenVoorBestelling
 			// 
@@ -398,32 +399,30 @@
 			this.lblTotaalEx.AutoSize = true;
 			this.lblTotaalEx.Location = new System.Drawing.Point(132, 535);
 			this.lblTotaalEx.Name = "lblTotaalEx";
-			this.lblTotaalEx.Size = new System.Drawing.Size(111, 13);
+			this.lblTotaalEx.Size = new System.Drawing.Size(0, 13);
 			this.lblTotaalEx.TabIndex = 31;
-			this.lblTotaalEx.Text = "Totaalprijis ex toeslag:";
 			// 
 			// lblToeslagPercentage
 			// 
 			this.lblToeslagPercentage.AutoSize = true;
 			this.lblToeslagPercentage.Location = new System.Drawing.Point(132, 557);
 			this.lblToeslagPercentage.Name = "lblToeslagPercentage";
-			this.lblToeslagPercentage.Size = new System.Drawing.Size(102, 13);
+			this.lblToeslagPercentage.Size = new System.Drawing.Size(0, 13);
 			this.lblToeslagPercentage.TabIndex = 32;
-			this.lblToeslagPercentage.Text = "Toeslagpercentage:";
 			// 
 			// lblTotaalprijs
 			// 
 			this.lblTotaalprijs.AutoSize = true;
 			this.lblTotaalprijs.Location = new System.Drawing.Point(132, 580);
 			this.lblTotaalprijs.Name = "lblTotaalprijs";
-			this.lblTotaalprijs.Size = new System.Drawing.Size(60, 13);
+			this.lblTotaalprijs.Size = new System.Drawing.Size(0, 13);
 			this.lblTotaalprijs.TabIndex = 33;
-			this.lblTotaalprijs.Text = "Totaalprijis:";
 			// 
 			// BestellingAddEdit
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.CancelButton = this.btnCancel;
 			this.ClientSize = new System.Drawing.Size(528, 635);
 			this.Controls.Add(this.lblTotaalprijs);
 			this.Controls.Add(this.lblToeslagPercentage);
@@ -434,7 +433,7 @@
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.gbOrderLine);
 			this.Controls.Add(this.groupBox1);
-			this.Controls.Add(this.button2);
+			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnPlaatsBestelling);
 			this.Controls.Add(this.cbKlant);
 			this.Controls.Add(this.label1);
@@ -464,7 +463,7 @@
 		private System.Windows.Forms.ColumnHeader chPlant;
 		private System.Windows.Forms.ColumnHeader chLengte;
 		private System.Windows.Forms.Button btnPlaatsBestelling;
-		private System.Windows.Forms.Button button2;
+		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.ContextMenuStrip cmsPlantenVoorBestelling;
 		private System.Windows.Forms.ToolStripMenuItem toevoegenAanBestellingToolStripMenuItem;
 		private System.Windows.Forms.Label lblGeselecteerdePlant;

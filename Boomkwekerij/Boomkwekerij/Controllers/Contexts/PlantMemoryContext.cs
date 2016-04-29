@@ -5,7 +5,7 @@ using Boomkwekerij.Controllers.Interfaces;
 
 namespace Boomkwekerij.Controllers.Contexts
 {
-	public sealed class PlantMemoryContext : IPlantContext
+	public sealed class PlantMemoryContext : IContext<Plant>
 	{
 		private List<Plant> planten;
 
@@ -42,19 +42,6 @@ namespace Boomkwekerij.Controllers.Contexts
 		{
 			planten.Remove(entity);
 			return true;
-		}
-
-		public bool Update(Voorraad entity)
-		{
-			try
-			{
-				planten.Find(p => p.Voorraad.Id == entity.Id).Voorraad = entity;
-				return true;
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
 		}
 
 		public bool Update(Plant entity)

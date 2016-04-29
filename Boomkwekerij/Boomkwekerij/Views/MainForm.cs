@@ -132,6 +132,7 @@ namespace Boomkwekerij
 			if (bestellingAddForm.DialogResult == DialogResult.OK)
 			{
 				kwekerij.Bestellingen.Add(bestellingAddForm.Bestelling);
+				refreshMainView();
 			}
 		}
 	}

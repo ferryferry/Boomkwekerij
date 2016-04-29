@@ -25,12 +25,10 @@ namespace Boomkwekerij.Views
 			lvVoorraad.Items.Clear();
 			foreach (Plant plant in planten.Where(p=> p.Naam.ToLower().Contains(txtFilter.Text.ToLower())))
 			{
-				ListViewItem item = new ListViewItem(new string[] { plant.Voorraad.Aantal.ToString() + " x", plant.Naam, EnumDescriptionConverter.GetDescriptionFromEnum(plant.PlantGrootte), plant.Jaren(), plant.Opmerking });
+				ListViewItem item = new ListViewItem(new string[] { plant.Voorraad.ToString() + " x", plant.Naam, EnumDescriptionConverter.GetDescriptionFromEnum(plant.PlantGrootte), plant.Jaren(), plant.Opmerking });
 				item.Tag = plant;
 				lvVoorraad.Items.Add(item);
 			}
-			lvVoorraad.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-			lvVoorraad.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 			lvVoorraadSortOrder = SortOrder.None;
 		}
 
@@ -56,7 +54,7 @@ namespace Boomkwekerij.Views
 
 		private void plantToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			PlantAddEdit plantEditForm = new PlantAddEdit(new Plant());
+			PlantAddEdit plantEditForm = new PlantAddEdit(new Plant(0));
 			plantEditForm.ShowDialog();
 			if (plantEditForm.DialogResult == DialogResult.OK)
 			{

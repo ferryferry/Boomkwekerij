@@ -110,9 +110,9 @@
             this.chEmail});
 			this.lvKlanten.ContextMenuStrip = this.cmsKlant;
 			this.lvKlanten.FullRowSelect = true;
-			this.lvKlanten.Location = new System.Drawing.Point(0, 58);
+			this.lvKlanten.Location = new System.Drawing.Point(12, 58);
 			this.lvKlanten.Name = "lvKlanten";
-			this.lvKlanten.Size = new System.Drawing.Size(679, 348);
+			this.lvKlanten.Size = new System.Drawing.Size(655, 336);
 			this.lvKlanten.Sorting = System.Windows.Forms.SortOrder.Ascending;
 			this.lvKlanten.TabIndex = 1;
 			this.lvKlanten.UseCompatibleStateImageBehavior = false;
@@ -125,12 +125,12 @@
 			// chNaam
 			// 
 			this.chNaam.Text = "Naam";
-			this.chNaam.Width = 40;
+			this.chNaam.Width = 130;
 			// 
 			// chAdres
 			// 
 			this.chAdres.Text = "Adres";
-			this.chAdres.Width = 39;
+			this.chAdres.Width = 150;
 			// 
 			// chPostcode
 			// 
@@ -140,7 +140,7 @@
 			// chWoonplaats
 			// 
 			this.chWoonplaats.Text = "Woonplaats";
-			this.chWoonplaats.Width = 69;
+			this.chWoonplaats.Width = 100;
 			// 
 			// chTelefoonnummer
 			// 
@@ -150,7 +150,7 @@
 			// chEmail
 			// 
 			this.chEmail.Text = "Email";
-			this.chEmail.Width = 379;
+			this.chEmail.Width = 123;
 			// 
 			// txtFilter
 			// 

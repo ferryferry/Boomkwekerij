@@ -80,7 +80,6 @@ namespace Boomkwekerij.Models
 			foreach (Plant plant in Planten)
 			{
 				plant.PropertyChanged += ItemPropertyChanged;
-				plant.Voorraad.PropertyChanged += ItemPropertyChanged;
 			}
 
 			Bestellingen.CollectionChanged += ObservableListCollection_CollectionChanged;
@@ -99,9 +98,8 @@ namespace Boomkwekerij.Models
 			{
 				foreach (object item in e.NewItems)
 				{
-					if (item is Plant || item is Voorraad)
+					if (item is Plant)
 					{
-						((Plant)item).Voorraad.PropertyChanged += ItemPropertyChanged;
 						plantRepo.Insert((Plant)item);
 					}
 					else if(item is Klant)
@@ -122,7 +120,6 @@ namespace Boomkwekerij.Models
 					if (item is Plant)
 					{
 						plantRepo.Remove((Plant)item);
-						((Plant)item).Voorraad.PropertyChanged -= ItemPropertyChanged;
 					}
 					else if (item is Klant)
 					{
@@ -142,10 +139,6 @@ namespace Boomkwekerij.Models
 			if (sender is Plant)
 			{
 				plantRepo.Update((Plant)sender);
-			}
-			else if(sender is Voorraad)
-			{
-				plantRepo.Update((Voorraad)sender);
 			}
 			else if (sender is Klant)
 			{

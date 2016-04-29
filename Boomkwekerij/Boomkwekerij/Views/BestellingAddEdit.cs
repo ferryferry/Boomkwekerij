@@ -109,7 +109,7 @@ namespace Boomkwekerij.Views
 			lvPlantenInVoorraad.Items.Clear();
 			foreach (Plant plant in planten.Where(p => p.Naam.ToLower().Contains("".ToLower())))
 			{
-				ListViewItem item = new ListViewItem(new string[] { plant.Voorraad.Aantal.ToString() + " x", plant.Naam, EnumDescriptionConverter.GetDescriptionFromEnum(plant.PlantGrootte), plant.Jaren(), plant.Opmerking });
+				ListViewItem item = new ListViewItem(new string[] { plant.Voorraad.ToString() + " x", plant.Naam, EnumDescriptionConverter.GetDescriptionFromEnum(plant.PlantGrootte), plant.Jaren(), plant.Opmerking });
 				item.Tag = plant;
 				lvPlantenInVoorraad.Items.Add(item);
 			}
