@@ -70,9 +70,10 @@ namespace Boomkwekerij.Models
 		#endregion
 
 		#region Constructors
-		public Bestelling()
+		public Bestelling(int id)
 		{
-
+			Id = id;
+			Bestelregels = new List<Bestelregel>();
 		}
 		public Bestelling(int id, DateTime besteldatum, DateTime factuurdatum, DateTime laatstAfgedrukt, ToeslagPercentage toeslagPercentage, bool betaald, Klant klant, List<Bestelregel> bestelregels)
 		{
@@ -91,6 +92,7 @@ namespace Boomkwekerij.Models
 		}
 		#endregion
 
+		#region EventHandlers
 		#region PropertyChangedEvent
 		public event PropertyChangedEventHandler PropertyChanged;
 		private void OnPropertyChanged(string propertyName)
@@ -103,6 +105,35 @@ namespace Boomkwekerij.Models
 			field = value;
 			OnPropertyChanged(propertyName);
 			return true;
+		}
+		#endregion
+		#endregion
+
+		#region Methods
+		public decimal BerekenTotaalprijs()
+		{
+			decimal prijsInclusief = BerekenTotaalprijsEx() * (1 + ToeslagPercentage.GetValidPercentageForDate(Besteldatum) / 100);
+			return Math.Round((prijsInclusief), 2);
+		}
+
+		public decimal BerekenTotaalprijsEx()
+		{
+			int prijs = 0;
+			foreach (Bestelregel bestelregel in Bestelregels)
+			{
+				prijs += bestelregel.Prijs * bestelregel.Aantal;
+			}
+			return Math.Round((prijs / 100M), 3);
+		}
+
+		public string FormattedPrijsEx()
+		{
+			return string.Format("€ {0:0.00}", BerekenTotaalprijsEx());
+		}
+
+		public string FormattedPrijs()
+		{
+			return string.Format("€ {0:0.00}", BerekenTotaalprijs());
 		}
 		#endregion
 	}

@@ -53,6 +53,7 @@
     <Compile Include="Controllers\Contexts\BestellingMemoryContext.cs" />
     <Compile Include="Controllers\Contexts\KlantMemoryContext.cs" />
     <Compile Include="Controllers\Contexts\PlantMemoryContext.cs" />
+    <Compile Include="Controllers\Contexts\TestData.cs" />
     <Compile Include="Controllers\Interfaces\IContext.cs" />
     <Compile Include="Controllers\Interfaces\IPlantContext.cs" />
     <Compile Include="Controllers\Repositories\BestellingRepository.cs" />
@@ -137,7 +138,6 @@
     <EmbeddedResource Include="Views\Voorraadbeheer.resx">
       <DependentUpon>Voorraadbeheer.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="boomkwekerij_database.db" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

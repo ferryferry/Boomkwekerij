@@ -9,15 +9,16 @@ namespace Boomkwekerij.Controllers.Contexts
 	{
 		private List<Plant> planten;
 
-		public PlantMemoryContext()
+		public PlantMemoryContext(bool useTestData = false)
 		{
-			planten = new List<Plant>();
-			planten.Add(new Plant(1, "Hortensia", Plant.Grootte.G2040, 2, 1, "Twee takken", new Voorraad(1, 3000)));
-			planten.Add(new Plant(2, "Viooltje", Plant.Grootte.G4060, 3, 1, "", new Voorraad(2, 3000)));
-			planten.Add(new Plant(3, "Orchidee", Plant.Grootte.G6080, 1, 1, "Met een grote bloem", new Voorraad(3, 3000)));
-			planten.Add(new Plant(4, "Berk", Plant.Grootte.G4060, 2, 1, "5+ takken", new Voorraad(4, 3000)));
-			planten.Add(new Plant(5, "Den", Plant.Grootte.G80100, 1, 1, "4 takken", new Voorraad(5, 3000)));
-			planten.Add(new Plant(6, "Beuk", Plant.Grootte.G140160, 3, 1, "Wit", new Voorraad(6, 3000)));
+			if (useTestData)
+			{
+				planten = TestData.GetPlanten();
+			}
+			else
+			{
+				planten = new List<Plant>();
+			}
 		}
 
 		public Plant Get(int id)

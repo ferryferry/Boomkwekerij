@@ -93,27 +93,27 @@
             this.klantToolStripMenuItem,
             this.plantToolStripMenuItem});
 			this.nieuwToolStripMenuItem.Name = "nieuwToolStripMenuItem";
-			this.nieuwToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.nieuwToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
 			this.nieuwToolStripMenuItem.Text = "Nieuw";
 			// 
 			// bestellingToolStripMenuItem
 			// 
 			this.bestellingToolStripMenuItem.Name = "bestellingToolStripMenuItem";
-			this.bestellingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.bestellingToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
 			this.bestellingToolStripMenuItem.Text = "Bestelling";
 			this.bestellingToolStripMenuItem.Click += new System.EventHandler(this.bestellingToolStripMenuItem_Click);
 			// 
 			// klantToolStripMenuItem
 			// 
 			this.klantToolStripMenuItem.Name = "klantToolStripMenuItem";
-			this.klantToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.klantToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
 			this.klantToolStripMenuItem.Text = "Klant";
 			this.klantToolStripMenuItem.Click += new System.EventHandler(this.klantToolStripMenuItem_Click);
 			// 
 			// plantToolStripMenuItem
 			// 
 			this.plantToolStripMenuItem.Name = "plantToolStripMenuItem";
-			this.plantToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.plantToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
 			this.plantToolStripMenuItem.Text = "Plant";
 			// 
 			// beheerToolStripMenuItem
@@ -128,14 +128,14 @@
 			// klantenToolStripMenuItem
 			// 
 			this.klantenToolStripMenuItem.Name = "klantenToolStripMenuItem";
-			this.klantenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.klantenToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
 			this.klantenToolStripMenuItem.Text = "Klanten";
 			this.klantenToolStripMenuItem.Click += new System.EventHandler(this.klantenToolStripMenuItem_Click);
 			// 
 			// voorraadToolStripMenuItem
 			// 
 			this.voorraadToolStripMenuItem.Name = "voorraadToolStripMenuItem";
-			this.voorraadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.voorraadToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
 			this.voorraadToolStripMenuItem.Text = "Voorraad";
 			this.voorraadToolStripMenuItem.Click += new System.EventHandler(this.voorraadToolStripMenuItem_Click);
 			// 
@@ -154,9 +154,9 @@
             this.chToeslagPercentage,
             this.chBetaald});
 			this.lvBestellingen.FullRowSelect = true;
-			this.lvBestellingen.Location = new System.Drawing.Point(0, 57);
+			this.lvBestellingen.Location = new System.Drawing.Point(12, 57);
 			this.lvBestellingen.Name = "lvBestellingen";
-			this.lvBestellingen.Size = new System.Drawing.Size(896, 284);
+			this.lvBestellingen.Size = new System.Drawing.Size(872, 284);
 			this.lvBestellingen.Sorting = System.Windows.Forms.SortOrder.Ascending;
 			this.lvBestellingen.TabIndex = 2;
 			this.lvBestellingen.UseCompatibleStateImageBehavior = false;
@@ -305,33 +305,32 @@
 			// chPlant
 			// 
 			this.chPlant.Text = "Plant";
-			this.chPlant.Width = 36;
+			this.chPlant.Width = 120;
 			// 
 			// chAantal
 			// 
 			this.chAantal.Text = "Aantal";
-			this.chAantal.Width = 42;
 			// 
 			// chPrijs
 			// 
 			this.chPrijs.Text = "Prijs";
-			this.chPrijs.Width = 31;
+			this.chPrijs.Width = 80;
 			// 
 			// chGrootte
 			// 
 			this.chGrootte.Text = "Grootte";
 			this.chGrootte.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.chGrootte.Width = 47;
+			this.chGrootte.Width = 80;
 			// 
 			// chJaren
 			// 
 			this.chJaren.Text = "Jaren";
-			this.chJaren.Width = 82;
+			this.chJaren.Width = 80;
 			// 
 			// chOpmerking
 			// 
 			this.chOpmerking.Text = "Opmerking";
-			this.chOpmerking.Width = 138;
+			this.chOpmerking.Width = 200;
 			// 
 			// MainForm
 			// 

@@ -44,6 +44,15 @@ namespace Boomkwekerij.Models
 		{
 			Id = id;
 		}
+
+		public Bestelregel(int id, Plant plant, int aantal, int prijs)
+		{
+			Id = id;
+			Plant = plant;
+			Aantal = aantal;
+			Prijs = prijs;
+		}
+
 		public Bestelregel(int id, Plant plant, int aantal, int prijs, ObservableCollection<Levering> leveringen)
 		{
 			Id = id;

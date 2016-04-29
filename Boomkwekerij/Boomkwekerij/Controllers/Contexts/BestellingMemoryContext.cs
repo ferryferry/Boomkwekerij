@@ -14,50 +14,16 @@ namespace Boomkwekerij.Controllers.Contexts
 	{
 		private List<Bestelling> bestellingen;
 
-		public BestellingMemoryContext()
+		public BestellingMemoryContext(bool useTestData = false)
 		{
-			bestellingen = new List<Bestelling>();
-			bestellingen.Add(new Bestelling(1,DateTime.Now.AddDays(-4), DateTime.Now.AddDays(-1), DateTime.Now, new ToeslagPercentage(0, 571, DateTime.Now.AddDays(-12)), false, new Klant(1), new List<Bestelregel>()
+			if (useTestData)
 			{
-				new Bestelregel(1, new Plant(1), 40, 45,
-				new ObservableCollection<Levering>()
-				{
-					new Levering(1,20,DateTime.Now.AddDays(-2), true),
-					new Levering(2,20,DateTime.Now, true)
-				}),
-				new Bestelregel(2, new Plant(2), 40, 23, null),
-				new Bestelregel(3, new Plant(2), 40, 25, null),
-				new Bestelregel(4, new Plant(2), 40, 32, null),
-			}));
-			bestellingen.Add(new Bestelling(2, DateTime.Now.AddDays(-10), DateTime.Now.AddDays(-2), DateTime.Now, new ToeslagPercentage(0, 571, DateTime.Now.AddDays(-12)), false, new Klant(2), new List<Bestelregel>()
+				bestellingen = TestData.GetBestellingen();
+			}
+			else
 			{
-				new Bestelregel(1, new Plant(3), 40, 45, null),
-				new Bestelregel(2, new Plant(4), 40, 23, null),
-				new Bestelregel(3, new Plant(5), 40, 25, null),
-				new Bestelregel(4, new Plant(6), 40, 32, null),
-			}));
-			bestellingen.Add(new Bestelling(3, DateTime.Now.AddDays(-4), DateTime.Now.AddDays(-3), DateTime.Now, new ToeslagPercentage(0, 571, DateTime.Now.AddDays(-12)), false, new Klant(3), new List<Bestelregel>()
-			{
-				new Bestelregel(1, new Plant(1), 40, 45, null),
-				new Bestelregel(2, new Plant(2), 40, 23, null),
-				new Bestelregel(3, new Plant(3), 40, 25, null),
-				new Bestelregel(4, new Plant(4), 40, 32, null),
-			}));
-			bestellingen.Add(new Bestelling(4, DateTime.Now.AddDays(-3), DateTime.Now.AddDays(-4), DateTime.Now, new ToeslagPercentage(0, 571, DateTime.Now.AddDays(-12)), false, new Klant(2), new List<Bestelregel>()
-			{
-				new Bestelregel(1, new Plant(3), 40, 45, null),
-				new Bestelregel(2, new Plant(2), 40, 23, null),
-				new Bestelregel(3, new Plant(4), 40, 25, null),
-				new Bestelregel(4, new Plant(1), 40, 32, null),
-			}));
-			bestellingen.Add(new Bestelling(5, DateTime.Now.AddDays(-5), DateTime.Now.AddDays(-5), DateTime.Now, new ToeslagPercentage(0, 571, DateTime.Now.AddDays(-12)), false, new Klant(1), new List<Bestelregel>()
-			{
-				new Bestelregel(1, new Plant(1), 40, 45, null),
-				new Bestelregel(2, new Plant(2), 40, 23, null),
-				new Bestelregel(3, new Plant(2), 40, 25, null),
-				new Bestelregel(4, new Plant(2), 40, 32, null),
-			}));
-
+				bestellingen = new List<Bestelling>();
+			}
 		}
 
 		public Bestelling Insert(Bestelling entity)

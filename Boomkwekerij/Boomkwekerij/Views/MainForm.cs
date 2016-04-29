@@ -60,8 +60,6 @@ namespace Boomkwekerij
 				item.Tag = bestelling;
 				lvBestellingen.Items.Add(item);
 			}
-			lvBestellingen.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-			lvBestellingen.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 			lvBestellingenSortOrder = SortOrder.None;
 		}
 
@@ -74,8 +72,6 @@ namespace Boomkwekerij
 				item.Tag = bestelregel;
 				lvPlantenInBestelling.Items.Add(item);
 			}
-			lvPlantenInBestelling.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-			lvPlantenInBestelling.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 		}
 
 		private void klantenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -131,7 +127,7 @@ namespace Boomkwekerij
 
 		private void bestellingToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			BestellingAddEdit bestellingAddForm = new BestellingAddEdit(new Bestelling(), kwekerij.Planten);
+			BestellingAddEdit bestellingAddForm = new BestellingAddEdit(new Bestelling(0), kwekerij.Planten, kwekerij.Klanten);
 			bestellingAddForm.ShowDialog();
 			if (bestellingAddForm.DialogResult == DialogResult.OK)
 			{

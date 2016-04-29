@@ -50,9 +50,9 @@ namespace Boomkwekerij.Models
 			KvkNummer = kvkNummer;
 
 			// Initialize Repositories with Contexts
-			klantRepo = new KlantRepository(new KlantMemoryContext());
-			bestellingRepo = new BestellingRepository(new BestellingMemoryContext());
-			plantRepo = new PlantRepository(new PlantMemoryContext());
+			klantRepo = new KlantRepository(new KlantMemoryContext(true));
+			bestellingRepo = new BestellingRepository(new BestellingMemoryContext(true));
+			plantRepo = new PlantRepository(new PlantMemoryContext(true));
 
 			// Initialize Lists
 			Klanten = new ObservableCollection<Klant>(klantRepo.GetAll());

@@ -153,6 +153,25 @@ namespace Boomkwekerij.Models
 			return false;
 		}
 
+		public Bestelregel BestelPlant(int aantal, int prijs, List<Bestelregel> bestelregels)
+		{
+			if (CheckVoorraad(aantal))
+			{
+				voorraad.Aantal -= aantal;
+				if (bestelregels.Exists(br => br.Plant.Id == Id))
+				{
+					Bestelregel bestelregel = bestelregels.Single(br => br.Plant.Id == Id);
+					bestelregel.Aantal += aantal;
+					return null;
+				}
+				else
+				{
+					return new Bestelregel(0, this, aantal, prijs);
+				}
+			}
+			return null;
+		}
+
 		public override string ToString()
 		{
 			return Naam;
