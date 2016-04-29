@@ -347,6 +347,7 @@
 			this.lvPlantenInBestelling.View = System.Windows.Forms.View.Details;
 			this.lvPlantenInBestelling.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvPlantenInBestelling_KeyDown);
 			this.lvPlantenInBestelling.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvPlantenInBestelling_MouseClick);
+			this.lvPlantenInBestelling.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvPlantenInBestelling_MouseDoubleClick);
 			// 
 			// columnHeader1
 			// 

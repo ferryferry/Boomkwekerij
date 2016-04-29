@@ -45,6 +45,7 @@ namespace Boomkwekerij.Views
 		}
 		#endregion
 
+		#region EventHandlers
 		private void BestellingAddEdit_Load(object sender, EventArgs e)
 		{
 			foreach (Klant klant in klanten)
@@ -102,18 +103,6 @@ namespace Boomkwekerij.Views
 			nudEuro.Enabled = canChangePrice;
 		}
 
-		private bool checkPlantInBestelling(Plant plant)
-		{
-			foreach (ListViewItem item in lvPlantenInBestelling.Items)
-			{
-				if (((Bestelregel)item.Tag).Plant == plant)
-				{
-					return false;
-				}
-			}
-			return true;
-		}
-
 		private void btnToevoegenAanBestelling_Click(object sender, EventArgs e)
 		{
 			if (geselecteerdePlant != null && validateFieldsToAddOrderLine())
@@ -144,70 +133,12 @@ namespace Boomkwekerij.Views
 			}
 		}
 
-		private void refreshView()
-		{
-			lblTotaalEx.Text = Bestelling.FormattedPrijsEx();
-			lblToeslagPercentage.Text = Bestelling.ToeslagPercentage.ToString();
-			lblTotaalprijs.Text = Bestelling.FormattedPrijs();
-			lvPlantenInBestelling.Items.Clear();
-			lvPlantenInVoorraad.Items.Clear();
-			foreach (Plant plant in planten.Where(p => p.Naam.ToLower().Contains("".ToLower())))
-			{
-				ListViewItem item = new ListViewItem(new string[] { plant.Voorraad.ToString() + " x", plant.Naam, EnumDescriptionConverter.GetDescriptionFromEnum(plant.PlantGrootte), plant.Jaren(), plant.Opmerking });
-				item.Tag = plant;
-				lvPlantenInVoorraad.Items.Add(item);
-			}
-
-			if(Bestelling.Bestelregels != null)
-			{
-				foreach (Bestelregel bestelregel in Bestelling.Bestelregels)
-				{
-					decimal prijs = Math.Round((bestelregel.Prijs / 100M), 3);
-					ListViewItem item = new ListViewItem(new string[] { bestelregel.Aantal + " x", bestelregel.Plant.Naam, EnumDescriptionConverter.GetDescriptionFromEnum(bestelregel.Plant.PlantGrootte), bestelregel.Plant.Jaren(), string.Format("€ {0:0.00}", prijs), string.Format("€ {0:0.00}", (prijs * bestelregel.Aantal)) });
-					item.Tag = bestelregel;
-					lvPlantenInBestelling.Items.Add(item);
-				}
-			}
-		}
-
 		private void btnPlaatsBestelling_Click(object sender, EventArgs e)
 		{
 			if (validateFieldsToOrder())
 			{
 				DialogResult = DialogResult.OK;
 			}
-		}
-
-		private bool validateFieldsToAddOrderLine()
-		{
-			if (nudAantal.Value == 0)
-				SetError(cbKlant, string.Format("Er kan niet 0x een {0} worden besteld!",geselecteerdePlant.Naam));
-			if (nudEuro.Value == 0 && nudCenten.Value == 0 && checkPlantInBestelling(geselecteerdePlant))
-				SetError(nudCenten, string.Format("De prijs per {0} kan niet 0 zijn!",geselecteerdePlant.Naam));
-			if (errorCount == 0)
-			{
-				return true;
-			}
-			return false;
-		}
-
-		private bool validateFieldsToOrder()
-		{
-			if (cbKlant.SelectedIndex == -1)
-				SetError(cbKlant, "Er is geen naam klant geselecteerd!");
-			if (lvPlantenInBestelling.Items.Count == 0)
-				SetError(lvPlantenInBestelling, "Er zijn geen items toegevoegd aan de bestelling!");
-			if (errorCount == 0)
-			{
-				return true;
-			}
-			return false;
-		}
-
-		private void SetError(Control control, string message)
-		{
-			epFields.SetError(control, message);
-			errorCount++;
 		}
 
 		private void nud_ValueChanged(object sender, EventArgs e)
@@ -236,7 +167,7 @@ namespace Boomkwekerij.Views
 					}
 				}
 			}
-			else if(DialogResult == DialogResult.Cancel && formmode == Formmode.edit && isEdited)
+			else if (DialogResult == DialogResult.Cancel && formmode == Formmode.edit && isEdited)
 			{
 				DialogResult dialogResult = MessageBox.Show("Weet u zeker dat u de bestelling niet meer wilt aanpassen\nDe bestelling zal worden hersteld zoals u hem heeft geopend?", "Bestelling aanpassen annuleren?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 				if (dialogResult == DialogResult.No)
@@ -263,16 +194,6 @@ namespace Boomkwekerij.Views
 			showPlantEditForm();
 		}
 
-		private void showPlantEditForm()
-		{
-			PlantAddEdit plantEditForm = new PlantAddEdit(geselecteerdePlant);
-			plantEditForm.ShowDialog();
-			if (plantEditForm.DialogResult == DialogResult.OK)
-			{
-				refreshView();
-			}
-		}
-
 		private void lvPlantenInVoorraad_MouseClick(object sender, MouseEventArgs e)
 		{
 			if (lvPlantenInVoorraad.FocusedItem.Bounds.Contains(e.Location) && e.Button == MouseButtons.Right)
@@ -293,6 +214,119 @@ namespace Boomkwekerij.Views
 		{
 			verwijderBestelregel();
 		}
+
+		private void lvPlantenInBestelling_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Delete)
+			{
+				verwijderBestelregel();
+			}
+			else if(e.KeyCode == Keys.Enter)
+			{
+				showBestelRegelEditForm();
+			}
+		}
+
+		private void lvPlantenInBestelling_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			if (lvPlantenInBestelling.FocusedItem.Bounds.Contains(e.Location))
+			{
+				showBestelRegelEditForm();
+			}
+		}
+		#endregion
+
+		#region Methods
+		private bool checkPlantInBestelling(Plant plant)
+		{
+			foreach (ListViewItem item in lvPlantenInBestelling.Items)
+			{
+				if (((Bestelregel)item.Tag).Plant == plant)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+
+		private void refreshView()
+		{
+			lblTotaalEx.Text = Bestelling.FormattedPrijsEx();
+			lblToeslagPercentage.Text = Bestelling.ToeslagPercentage.ToString();
+			lblTotaalprijs.Text = Bestelling.FormattedPrijs();
+			lvPlantenInBestelling.Items.Clear();
+			lvPlantenInVoorraad.Items.Clear();
+			foreach (Plant plant in planten.Where(p => p.Naam.ToLower().Contains("".ToLower())))
+			{
+				ListViewItem item = new ListViewItem(new string[] { plant.Voorraad.ToString() + " x", plant.Naam, EnumDescriptionConverter.GetDescriptionFromEnum(plant.PlantGrootte), plant.Jaren(), plant.Opmerking });
+				item.Tag = plant;
+				lvPlantenInVoorraad.Items.Add(item);
+			}
+
+			if (Bestelling.Bestelregels != null)
+			{
+				foreach (Bestelregel bestelregel in Bestelling.Bestelregels)
+				{
+					decimal prijs = Math.Round((bestelregel.Prijs / 100M), 3);
+					ListViewItem item = new ListViewItem(new string[] { bestelregel.Aantal + " x", bestelregel.Plant.Naam, EnumDescriptionConverter.GetDescriptionFromEnum(bestelregel.Plant.PlantGrootte), bestelregel.Plant.Jaren(), string.Format("€ {0:0.00}", prijs), string.Format("€ {0:0.00}", (prijs * bestelregel.Aantal)) });
+					item.Tag = bestelregel;
+					lvPlantenInBestelling.Items.Add(item);
+				}
+			}
+		}
+
+		private bool validateFieldsToAddOrderLine()
+		{
+			if (nudAantal.Value == 0)
+				SetError(nudAantal, string.Format("Er kan niet 0x een {0} worden besteld!", geselecteerdePlant.Naam));
+			if (nudEuro.Value == 0 && nudCenten.Value == 0 && checkPlantInBestelling(geselecteerdePlant))
+				SetError(nudCenten, string.Format("De prijs per {0} kan niet 0 zijn!", geselecteerdePlant.Naam));
+			if (errorCount == 0)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		private bool validateFieldsToOrder()
+		{
+			if (cbKlant.SelectedIndex == -1)
+				SetError(cbKlant, "Er is geen naam klant geselecteerd!");
+			if (lvPlantenInBestelling.Items.Count == 0)
+				SetError(lvPlantenInBestelling, "Er zijn geen items toegevoegd aan de bestelling!");
+			if (errorCount == 0)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		private void SetError(Control control, string message)
+		{
+			epFields.SetError(control, message);
+			errorCount++;
+		}
+
+		private void showPlantEditForm()
+		{
+			PlantAddEdit plantEditForm = new PlantAddEdit(geselecteerdePlant);
+			plantEditForm.ShowDialog();
+			if (plantEditForm.DialogResult == DialogResult.OK)
+			{
+				refreshView();
+			}
+		}
+
+		private void showBestelRegelEditForm()
+		{
+			BestelRegelEdit bestelRegelEditForm = new BestelRegelEdit((Bestelregel)lvPlantenInBestelling.SelectedItems[0].Tag);
+			bestelRegelEditForm.ShowDialog();
+			if (bestelRegelEditForm.DialogResult == DialogResult.OK)
+			{
+				refreshView();
+			}
+		}
+
 		private void verwijderBestelregel()
 		{
 			DialogResult dialogResult = MessageBox.Show("Weet u zeker dat u de bestelregel wilt verwijderen?\nDeze actie kan niet meer ongedaan gemaakt worden!", "Bestelregel verwijderen?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -305,13 +339,6 @@ namespace Boomkwekerij.Views
 				refreshView();
 			}
 		}
-
-		private void lvPlantenInBestelling_KeyDown(object sender, KeyEventArgs e)
-		{
-			if(e.KeyCode == Keys.Delete)
-			{
-				verwijderBestelregel();
-			}
-		}
+		#endregion
 	}
 }
