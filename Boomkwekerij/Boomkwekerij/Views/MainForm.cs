@@ -135,5 +135,18 @@ namespace Boomkwekerij
 				refreshMainView();
 			}
 		}
+
+		private void lvBestellingen_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			if (lvBestellingen.FocusedItem.Bounds.Contains(e.Location))
+			{
+				BestellingAddEdit bestellingEditForm = new BestellingAddEdit((Bestelling)lvBestellingen.SelectedItems[0].Tag, kwekerij.Planten, kwekerij.Klanten);
+				bestellingEditForm.ShowDialog();
+				if(bestellingEditForm.DialogResult == DialogResult.OK)
+				{
+					refreshMainView();
+				}
+			}
+		}
 	}
 }

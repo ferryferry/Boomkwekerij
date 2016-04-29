@@ -26,8 +26,8 @@ namespace Boomkwekerij.Controllers.Contexts
 					new Levering(2,20,DateTime.Now, true)
 				}),
 				new Bestelregel(2, new Plant(2), 40, 23, null),
-				new Bestelregel(3, new Plant(2), 40, 25, null),
-				new Bestelregel(4, new Plant(2), 40, 32, null),
+				new Bestelregel(3, new Plant(3), 40, 25, null),
+				new Bestelregel(4, new Plant(4), 40, 32, null),
 			}));
 			bestellingen.Add(new Bestelling(2, DateTime.Now.AddDays(-10), DateTime.Now.AddDays(-2), DateTime.Now, toeslagPercentage[0], false, new Klant(2), new List<Bestelregel>()
 			{
@@ -54,8 +54,8 @@ namespace Boomkwekerij.Controllers.Contexts
 			{
 				new Bestelregel(1, new Plant(1), 40, 45, null),
 				new Bestelregel(2, new Plant(2), 40, 23, null),
-				new Bestelregel(3, new Plant(2), 40, 25, null),
-				new Bestelregel(4, new Plant(2), 40, 32, null),
+				new Bestelregel(3, new Plant(4), 40, 25, null),
+				new Bestelregel(4, new Plant(5), 40, 32, null),
 			}));
 			return bestellingen;
 		}

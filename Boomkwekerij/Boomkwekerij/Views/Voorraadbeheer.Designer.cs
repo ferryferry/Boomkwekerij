@@ -53,19 +53,19 @@
             this.tsmiEdit,
             this.tsmiDelete});
 			this.cmsVoorraad.Name = "cmsKlant";
-			this.cmsVoorraad.Size = new System.Drawing.Size(153, 70);
+			this.cmsVoorraad.Size = new System.Drawing.Size(123, 48);
 			// 
 			// tsmiEdit
 			// 
 			this.tsmiEdit.Name = "tsmiEdit";
-			this.tsmiEdit.Size = new System.Drawing.Size(152, 22);
+			this.tsmiEdit.Size = new System.Drawing.Size(122, 22);
 			this.tsmiEdit.Text = "Bewerk";
 			this.tsmiEdit.Click += new System.EventHandler(this.tsmiEdit_Click);
 			// 
 			// tsmiDelete
 			// 
 			this.tsmiDelete.Name = "tsmiDelete";
-			this.tsmiDelete.Size = new System.Drawing.Size(152, 22);
+			this.tsmiDelete.Size = new System.Drawing.Size(122, 22);
 			this.tsmiDelete.Text = "Verwijder";
 			this.tsmiDelete.Click += new System.EventHandler(this.tsmiDelete_Click);
 			// 
@@ -90,7 +90,7 @@
 			// plantToolStripMenuItem
 			// 
 			this.plantToolStripMenuItem.Name = "plantToolStripMenuItem";
-			this.plantToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+			this.plantToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.plantToolStripMenuItem.Text = "Plant";
 			this.plantToolStripMenuItem.Click += new System.EventHandler(this.plantToolStripMenuItem_Click);
 			// 
@@ -108,9 +108,9 @@
             this.chOpmerking});
 			this.lvVoorraad.ContextMenuStrip = this.cmsVoorraad;
 			this.lvVoorraad.FullRowSelect = true;
-			this.lvVoorraad.Location = new System.Drawing.Point(0, 58);
+			this.lvVoorraad.Location = new System.Drawing.Point(12, 58);
 			this.lvVoorraad.Name = "lvVoorraad";
-			this.lvVoorraad.Size = new System.Drawing.Size(684, 353);
+			this.lvVoorraad.Size = new System.Drawing.Size(660, 341);
 			this.lvVoorraad.Sorting = System.Windows.Forms.SortOrder.Ascending;
 			this.lvVoorraad.TabIndex = 8;
 			this.lvVoorraad.UseCompatibleStateImageBehavior = false;
@@ -143,7 +143,7 @@
 			// chOpmerking
 			// 
 			this.chOpmerking.Text = "Opmerking";
-			this.chOpmerking.Width = 373;
+			this.chOpmerking.Width = 350;
 			// 
 			// label1
 			// 

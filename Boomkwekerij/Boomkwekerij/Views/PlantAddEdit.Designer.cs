@@ -271,6 +271,9 @@
 			this.Controls.Add(this.txtOpmerking);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.txtNaam);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
 			this.Name = "PlantAddEdit";
 			this.Text = "PlantAddEdit";
 			this.Load += new System.EventHandler(this.PlantAddEdit_Load);

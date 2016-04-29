@@ -75,7 +75,7 @@ namespace Boomkwekerij.Models
 			Id = id;
 			Bestelregels = new List<Bestelregel>();
 		}
-		public Bestelling(int id, DateTime besteldatum, DateTime factuurdatum, DateTime laatstAfgedrukt, ToeslagPercentage toeslagPercentage, bool betaald, Klant klant, List<Bestelregel> bestelregels)
+		public Bestelling(int id, DateTime? besteldatum, DateTime? factuurdatum, DateTime? laatstAfgedrukt, ToeslagPercentage toeslagPercentage, bool betaald, Klant klant, List<Bestelregel> bestelregels)
 		{
 			Id = id;
 			Besteldatum = besteldatum;

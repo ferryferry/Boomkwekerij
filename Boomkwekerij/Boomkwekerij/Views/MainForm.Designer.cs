@@ -162,6 +162,7 @@
 			this.lvBestellingen.UseCompatibleStateImageBehavior = false;
 			this.lvBestellingen.View = System.Windows.Forms.View.Details;
 			this.lvBestellingen.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvBestellingen_ItemSelectionChanged);
+			this.lvBestellingen.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvBestellingen_MouseDoubleClick);
 			// 
 			// chBestelnummer
 			// 
@@ -216,6 +217,8 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.groupBox1.Controls.Add(this.gbLeveringen);
 			this.groupBox1.Controls.Add(this.groupBox2);
 			this.groupBox1.Location = new System.Drawing.Point(12, 347);
@@ -227,6 +230,8 @@
 			// 
 			// gbLeveringen
 			// 
+			this.gbLeveringen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.gbLeveringen.Controls.Add(this.lvLeveringen);
 			this.gbLeveringen.Enabled = false;
 			this.gbLeveringen.Location = new System.Drawing.Point(675, 19);
@@ -272,6 +277,9 @@
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.groupBox2.Controls.Add(this.lvPlantenInBestelling);
 			this.groupBox2.Location = new System.Drawing.Point(6, 19);
 			this.groupBox2.Name = "groupBox2";
