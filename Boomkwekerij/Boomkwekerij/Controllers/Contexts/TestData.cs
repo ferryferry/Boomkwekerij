@@ -25,7 +25,7 @@ namespace Boomkwekerij.Controllers.Contexts
 					new Levering(1,20,DateTime.Now.AddDays(-2), true),
 					new Levering(2,20,DateTime.Now, true)
 				}),
-				new Bestelregel(2, new Plant(2), 40, 23, null),
+				new Bestelregel(2, new Plant(2), 40, 123, null),
 				new Bestelregel(3, new Plant(3), 40, 25, null),
 				new Bestelregel(4, new Plant(4), 40, 32, null),
 			}));

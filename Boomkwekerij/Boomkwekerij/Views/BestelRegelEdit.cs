@@ -19,6 +19,8 @@ namespace Boomkwekerij.Views
 
 		#region Fields
 		private int errorCount;
+		private int orgineelAantal;
+		private int verschil;
 		#endregion
 
 		#region Constructors
@@ -26,6 +28,7 @@ namespace Boomkwekerij.Views
 		{
 			InitializeComponent();
 			Bestelregel = bestelregel;
+			orgineelAantal = Bestelregel.Aantal;
 		}
 		#endregion
 
@@ -33,18 +36,18 @@ namespace Boomkwekerij.Views
 		private void BestelRegelEdit_Load(object sender, EventArgs e)
 		{
 			nudAantal.Value = Bestelregel.Aantal;
-			nudEuro.Value = Bestelregel.Prijs;
-			nudCenten.Value = Bestelregel.Prijs;
+			nudEuro.Value = Bestelregel.Prijs / 100;
+			nudCenten.Value = Bestelregel.Prijs - (Bestelregel.Prijs / 100) * 100;
 		}
 
 		private void btnBewerkBestelregel_Click(object sender, EventArgs e)
 		{
+			verschil = orgineelAantal - Convert.ToInt32(nudAantal.Value);
 			if (validateFields())
 			{
 				Bestelregel.Aantal = Convert.ToInt32(nudAantal.Value);
-				Bestelregel.Plant.Voorraad -= Bestelregel.Aantal;
-#warning Bestelregel aantal wordt nog niet goed uitgerekend.
-#warning Euros en centen moeten nog opgesplitst worden!
+				Bestelregel.Plant.Voorraad += verschil;
+				Bestelregel.Prijs = Convert.ToInt32((nudEuro.Value * 100) + nudCenten.Value);
 				DialogResult = DialogResult.OK;
 			}
 		}
@@ -63,7 +66,7 @@ namespace Boomkwekerij.Views
 				SetError(nudAantal, string.Format("Er kan niet 0x een {0} worden besteld!", Bestelregel.Plant.Naam));
 			if (nudEuro.Value == 0 && nudCenten.Value == 0)
 				SetError(nudCenten, string.Format("De prijs per {0} kan niet 0 zijn!", Bestelregel.Plant.Naam));
-			if(nudAantal.Value > Bestelregel.Plant.Voorraad)
+			if(!Bestelregel.Plant.CheckVoorraad(-verschil))
 				SetError(nudAantal, string.Format("Het product: {0} kan niet worden besteld, voorraad is niet genoeg!", Bestelregel.Plant.Naam));
 			if (errorCount == 0)
 			{

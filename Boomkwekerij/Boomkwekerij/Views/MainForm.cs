@@ -140,12 +140,81 @@ namespace Boomkwekerij
 		{
 			if (lvBestellingen.FocusedItem.Bounds.Contains(e.Location))
 			{
-				BestellingAddEdit bestellingEditForm = new BestellingAddEdit((Bestelling)lvBestellingen.SelectedItems[0].Tag, kwekerij.Planten, kwekerij.Klanten);
-				bestellingEditForm.ShowDialog();
-				if(bestellingEditForm.DialogResult == DialogResult.OK)
-				{
-					refreshMainView();
-				}
+				showBestellingEditForm();
+			}
+		}
+
+		private void showBestellingEditForm()
+		{
+			BestellingAddEdit bestellingEditForm = new BestellingAddEdit((Bestelling)lvBestellingen.SelectedItems[0].Tag, kwekerij.Planten, kwekerij.Klanten);
+			bestellingEditForm.ShowDialog();
+			if (bestellingEditForm.DialogResult == DialogResult.OK)
+			{
+				refreshMainView();
+			}
+		}
+
+		private void lvPlantenInBestelling_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+
+			if (lvPlantenInBestelling.FocusedItem.Bounds.Contains(e.Location))
+			{
+				showBestelRegelEditForm();
+			}
+		}
+
+		private void showBestelRegelEditForm()
+		{
+			BestelRegelEdit bestelRegelEditForm = new BestelRegelEdit((Bestelregel)lvPlantenInBestelling.SelectedItems[0].Tag);
+			bestelRegelEditForm.ShowDialog();
+			if (bestelRegelEditForm.DialogResult == DialogResult.OK)
+			{
+				refreshGeselecteerdeBestellingInformatie();
+			}
+		}
+
+		private void tsmiVerwijderUitBestelling_Click(object sender, EventArgs e)
+		{
+			verwijderBestelregel();
+		}
+
+		private void lvPlantenInBestelling_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Delete)
+			{
+				verwijderBestelregel();
+			}
+			else if (e.KeyCode == Keys.Enter)
+			{
+				showBestelRegelEditForm();
+			}
+		}
+
+		private void verwijderBestelregel()
+		{
+			DialogResult dialogResult = MessageBox.Show("Weet u zeker dat u de bestelregel wilt verwijderen?\nDeze actie kan niet meer ongedaan gemaakt worden!", "Bestelregel verwijderen?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+			if (dialogResult == DialogResult.Yes)
+			{
+				Bestelregel bestelregelToRemove = (Bestelregel)lvPlantenInBestelling.SelectedItems[0].Tag;
+				geselecteerdeBestelling.Bestelregels.Remove(bestelregelToRemove);
+				bestelregelToRemove.Plant.Voorraad += bestelregelToRemove.Aantal;
+				refreshGeselecteerdeBestellingInformatie();
+			}
+		}
+
+		private void lvPlantenInBestelling_MouseClick(object sender, MouseEventArgs e)
+		{
+			if (lvPlantenInBestelling.FocusedItem.Bounds.Contains(e.Location) && e.Button == MouseButtons.Right)
+			{
+				cmsPlantenVoorBestelling.Show(Cursor.Position);
+			}
+		}
+
+		private void lvBestellingen_KeyDown(object sender, KeyEventArgs e)
+		{
+			if(e.KeyCode == Keys.Enter)
+			{
+				showBestellingEditForm();
 			}
 		}
 	}

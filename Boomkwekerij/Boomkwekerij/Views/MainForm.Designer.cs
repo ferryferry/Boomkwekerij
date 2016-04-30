@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.msMain = new System.Windows.Forms.MenuStrip();
 			this.bestandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.nieuwToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,10 +62,13 @@
 			this.chGrootte = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.chJaren = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.chOpmerking = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.cmsPlantenVoorBestelling = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.tsmiVerwijderUitBestelling = new System.Windows.Forms.ToolStripMenuItem();
 			this.msMain.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.gbLeveringen.SuspendLayout();
 			this.groupBox2.SuspendLayout();
+			this.cmsPlantenVoorBestelling.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// msMain
@@ -162,6 +166,7 @@
 			this.lvBestellingen.UseCompatibleStateImageBehavior = false;
 			this.lvBestellingen.View = System.Windows.Forms.View.Details;
 			this.lvBestellingen.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvBestellingen_ItemSelectionChanged);
+			this.lvBestellingen.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvBestellingen_KeyDown);
 			this.lvBestellingen.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvBestellingen_MouseDoubleClick);
 			// 
 			// chBestelnummer
@@ -172,7 +177,7 @@
 			// chBesteldatum
 			// 
 			this.chBesteldatum.Text = "Besteldatum";
-			this.chBesteldatum.Width = 70;
+			this.chBesteldatum.Width = 140;
 			// 
 			// chKlant
 			// 
@@ -182,12 +187,12 @@
 			// chFactuurdatum
 			// 
 			this.chFactuurdatum.Text = "Factuurdatum";
-			this.chFactuurdatum.Width = 77;
+			this.chFactuurdatum.Width = 140;
 			// 
 			// chLaatstAfgedrukt
 			// 
 			this.chLaatstAfgedrukt.Text = "Laatst afgedrukt";
-			this.chLaatstAfgedrukt.Width = 89;
+			this.chLaatstAfgedrukt.Width = 140;
 			// 
 			// chToeslagPercentage
 			// 
@@ -273,7 +278,7 @@
 			// chLeverstatus
 			// 
 			this.chLeverstatus.Text = "Afgeleverd";
-			this.chLeverstatus.Width = 292;
+			this.chLeverstatus.Width = 65;
 			// 
 			// groupBox2
 			// 
@@ -310,6 +315,9 @@
 			this.lvPlantenInBestelling.UseCompatibleStateImageBehavior = false;
 			this.lvPlantenInBestelling.View = System.Windows.Forms.View.Details;
 			this.lvPlantenInBestelling.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvPlantenInBestelling_ItemSelectionChanged);
+			this.lvPlantenInBestelling.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvPlantenInBestelling_KeyDown);
+			this.lvPlantenInBestelling.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvPlantenInBestelling_MouseClick);
+			this.lvPlantenInBestelling.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvPlantenInBestelling_MouseDoubleClick);
 			// 
 			// chPlant
 			// 
@@ -341,6 +349,20 @@
 			this.chOpmerking.Text = "Opmerking";
 			this.chOpmerking.Width = 200;
 			// 
+			// cmsPlantenVoorBestelling
+			// 
+			this.cmsPlantenVoorBestelling.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiVerwijderUitBestelling});
+			this.cmsPlantenVoorBestelling.Name = "cmsVoorraad";
+			this.cmsPlantenVoorBestelling.Size = new System.Drawing.Size(207, 26);
+			// 
+			// tsmiVerwijderUitBestelling
+			// 
+			this.tsmiVerwijderUitBestelling.Name = "tsmiVerwijderUitBestelling";
+			this.tsmiVerwijderUitBestelling.Size = new System.Drawing.Size(206, 22);
+			this.tsmiVerwijderUitBestelling.Text = "Verwijderen uit bestelling";
+			this.tsmiVerwijderUitBestelling.Click += new System.EventHandler(this.tsmiVerwijderUitBestelling_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -360,6 +382,7 @@
 			this.groupBox1.ResumeLayout(false);
 			this.gbLeveringen.ResumeLayout(false);
 			this.groupBox2.ResumeLayout(false);
+			this.cmsPlantenVoorBestelling.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -400,6 +423,8 @@
 		private System.Windows.Forms.ToolStripMenuItem klantToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem plantToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem voorraadToolStripMenuItem;
+		private System.Windows.Forms.ContextMenuStrip cmsPlantenVoorBestelling;
+		private System.Windows.Forms.ToolStripMenuItem tsmiVerwijderUitBestelling;
 	}
 }
 

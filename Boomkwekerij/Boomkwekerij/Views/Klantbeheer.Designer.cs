@@ -112,7 +112,7 @@
 			this.lvKlanten.FullRowSelect = true;
 			this.lvKlanten.Location = new System.Drawing.Point(12, 58);
 			this.lvKlanten.Name = "lvKlanten";
-			this.lvKlanten.Size = new System.Drawing.Size(655, 336);
+			this.lvKlanten.Size = new System.Drawing.Size(655, 345);
 			this.lvKlanten.Sorting = System.Windows.Forms.SortOrder.Ascending;
 			this.lvKlanten.TabIndex = 1;
 			this.lvKlanten.UseCompatibleStateImageBehavior = false;
@@ -174,7 +174,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(679, 406);
+			this.ClientSize = new System.Drawing.Size(679, 415);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.txtFilter);
 			this.Controls.Add(this.lvKlanten);
