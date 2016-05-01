@@ -54,21 +54,52 @@ namespace Boomkwekerij
 		private void refreshMainView()
 		{
 			lvBestellingen.Items.Clear();
+			gbLeveringen.Enabled = false;
 			foreach (Bestelling bestelling in kwekerij.Bestellingen)
 			{
 				ListViewItem item = new ListViewItem(new string[] { bestelling.Id.ToString(), bestelling.Besteldatum.ToString(), bestelling.Klant.Naam, bestelling.Factuurdatum.ToString(), bestelling.LaatstAfgedrukt.ToString(), bestelling.ToeslagPercentage.ToString(), bestelling.Betaald ? "Ja" : "Nee" });
 				item.Tag = bestelling;
 				lvBestellingen.Items.Add(item);
+
+
+				if (bestelling.Betaald)
+				{
+					item.BackColor = Color.LightGreen;
+				}
+				else
+				{
+					item.BackColor = Color.MistyRose;
+				}
 			}
 			lvBestellingenSortOrder = SortOrder.None;
 		}
 
 		private void refreshGeselecteerdeBestellingInformatie()
 		{
+			lvLeveringen.Items.Clear();
 			lvPlantenInBestelling.Items.Clear();
 			foreach(Bestelregel bestelregel in geselecteerdeBestelling.Bestelregels)
 			{
-				ListViewItem item = new ListViewItem(new string[] { bestelregel.Plant.Naam, bestelregel.Aantal.ToString(), bestelregel.Prijs.ToString(), EnumDescriptionConverter.GetDescriptionFromEnum(bestelregel.Plant.PlantGrootte), bestelregel.Plant.Jaren(), bestelregel.Plant.Opmerking });
+				int aantalGeleverd = 0;
+				if (bestelregel.Leveringen != null)
+				{
+					foreach(Levering levering in bestelregel.Leveringen)
+					{
+						ListViewItem item2 = new ListViewItem(new string[] { bestelregel.Plant.Naam, levering.Aantal.ToString(), levering.Leverdatum.ToString() });
+						item2.Tag = levering;
+						lvLeveringen.Items.Add(item2);
+						aantalGeleverd += levering.Aantal;
+					}
+				}
+				ListViewItem item = new ListViewItem(new string[] { bestelregel.Plant.Naam, bestelregel.Aantal.ToString(), aantalGeleverd.ToString() + " x", bestelregel.Prijs.ToString(), EnumDescriptionConverter.GetDescriptionFromEnum(bestelregel.Plant.PlantGrootte), bestelregel.Plant.Jaren(), bestelregel.Plant.Opmerking });
+				if(bestelregel.Aantal > aantalGeleverd)
+				{
+					item.BackColor = Color.MistyRose;
+				}
+				else
+				{
+					item.BackColor = Color.LightGreen;
+				}
 				item.Tag = bestelregel;
 				lvPlantenInBestelling.Items.Add(item);
 			}
@@ -84,29 +115,7 @@ namespace Boomkwekerij
 		{
 			geselecteerdeBestelling = (Bestelling)e.Item.Tag;
 			refreshGeselecteerdeBestellingInformatie();
-		}
-
-		private void lvPlantenInBestelling_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-		{
-			lvLeveringen.Items.Clear();
-			if(lvPlantenInBestelling.SelectedItems.Count > 0)
-			{
-				Bestelregel bestelregel = (Bestelregel)lvPlantenInBestelling.SelectedItems[0].Tag;
-				if (bestelregel.Leveringen != null)
-				{
-					foreach (Levering levering in bestelregel.Leveringen)
-					{
-						ListViewItem item = new ListViewItem(new string[] { levering.Aantal.ToString() + " x", levering.Leverdatum.ToString(), levering.Geleverd ? "Ja" : "Nee" });
-						item.Tag = levering;
-						lvLeveringen.Items.Add(item);
-					}
-					gbLeveringen.Enabled = true;
-				}
-				else
-				{
-					gbLeveringen.Enabled = false;
-				}
-			}
+			gbLeveringen.Enabled = true;
 		}
 
 		private void klantToolStripMenuItem_Click(object sender, EventArgs e)
@@ -215,6 +224,93 @@ namespace Boomkwekerij
 			if(e.KeyCode == Keys.Enter)
 			{
 				showBestellingEditForm();
+			}
+		}
+
+		private void bewerkBestellingToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			showBestellingEditForm();
+		}
+
+		private void lvBestellingen_MouseClick(object sender, MouseEventArgs e)
+		{
+			if (lvBestellingen.FocusedItem.Bounds.Contains(e.Location) && e.Button == MouseButtons.Right)
+			{
+				cmsBestellingen.Show(Cursor.Position);
+			}
+		}
+
+		private void tsmiMaakLevering_Click(object sender, EventArgs e)
+		{
+			LeveringAdd leveringAddForm = new LeveringAdd((Bestelregel)lvPlantenInBestelling.SelectedItems[0].Tag, geselecteerdeBestelling);
+			leveringAddForm.ShowDialog();
+			if(leveringAddForm.DialogResult == DialogResult.OK)
+			{
+				refreshGeselecteerdeBestellingInformatie();
+			}
+		}
+
+		private void btnLeverAlles_Click(object sender, EventArgs e)
+		{
+			foreach (Bestelregel bestelregel in geselecteerdeBestelling.Bestelregels)
+			{
+				int aantalGeleverd = 0;
+
+				if (bestelregel.Leveringen != null)
+				{
+					Levering gevondenLevering = new Levering(-1);
+
+					foreach (Levering levering in bestelregel.Leveringen)
+					{
+						aantalGeleverd += levering.Aantal;
+						if(levering.Leverdatum.Value.Date == DateTime.Now.Date)
+						{
+							gevondenLevering = levering;
+						}
+					}
+					if (gevondenLevering.Id == -1)
+					{
+						bestelregel.Leveringen.Add(new Levering(0, bestelregel.Aantal - aantalGeleverd, DateTime.Now, true));
+					}
+					else
+					{
+						int index = bestelregel.Leveringen.IndexOf(gevondenLevering);
+						Levering levering = bestelregel.Leveringen[index];
+						levering.Aantal += bestelregel.Aantal - aantalGeleverd;
+					}
+				}
+
+				
+			}
+			refreshGeselecteerdeBestellingInformatie();
+		}
+
+		private void lvLeveringen_MouseClick(object sender, MouseEventArgs e)
+		{
+			if (lvLeveringen.FocusedItem.Bounds.Contains(e.Location) && e.Button == MouseButtons.Right)
+			{
+				cmsLeveringen.Show(Cursor.Position);
+			}
+		}
+
+		private void tsmiVerwijderLevering_Click(object sender, EventArgs e)
+		{
+			DialogResult dialogResult = MessageBox.Show("Weet u zeker dat u de levering wilt verwijderen?\nDeze actie kan niet meer ongedaan gemaakt worden!", "Levering verwijderen?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+			if (dialogResult == DialogResult.Yes)
+			{
+
+				foreach(Bestelregel br in geselecteerdeBestelling.Bestelregels)
+				{
+					foreach(Levering levering in br.Leveringen)
+					{
+						if(levering == (Levering)lvLeveringen.SelectedItems[0].Tag)
+						{
+							br.Leveringen.Remove(levering);
+							break;
+						}
+					}
+				}
+				refreshGeselecteerdeBestellingInformatie();
 			}
 		}
 	}

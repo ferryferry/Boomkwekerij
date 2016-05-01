@@ -13,6 +13,11 @@ namespace Boomkwekerij.Models
 		public DateTime? Leverdatum { get; set; }
 		public bool Geleverd { get; set; }
 
+		public Levering(int id)
+		{
+			Id = id;
+		}
+
 		public Levering(int id, int aantal, DateTime? leverdatum, bool geleverd)
 		{
 			Id = id;

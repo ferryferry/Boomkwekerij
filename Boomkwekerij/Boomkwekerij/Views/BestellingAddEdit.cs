@@ -234,6 +234,11 @@ namespace Boomkwekerij.Views
 				showBestelRegelEditForm();
 			}
 		}
+
+		private void bewerkBestelregelToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			showBestelRegelEditForm();
+		}
 		#endregion
 
 		#region Methods

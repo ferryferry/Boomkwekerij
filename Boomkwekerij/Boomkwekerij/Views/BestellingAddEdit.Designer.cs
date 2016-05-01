@@ -75,6 +75,7 @@
 			this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.bewerkBestelregelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.cmsPlantenVoorBestelling.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nudAantal)).BeginInit();
 			this.groupBox1.SuspendLayout();
@@ -178,9 +179,10 @@
 			// cmsPlantenVoorBestelling
 			// 
 			this.cmsPlantenVoorBestelling.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiVerwijderUitBestelling});
+            this.tsmiVerwijderUitBestelling,
+            this.bewerkBestelregelToolStripMenuItem});
 			this.cmsPlantenVoorBestelling.Name = "cmsVoorraad";
-			this.cmsPlantenVoorBestelling.Size = new System.Drawing.Size(207, 26);
+			this.cmsPlantenVoorBestelling.Size = new System.Drawing.Size(207, 48);
 			// 
 			// tsmiVerwijderUitBestelling
 			// 
@@ -440,13 +442,13 @@
 			this.cmsPlantenInVoorraad.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiBewerkPlant});
 			this.cmsPlantenInVoorraad.Name = "cmsVoorraad";
-			this.cmsPlantenInVoorraad.Size = new System.Drawing.Size(113, 26);
+			this.cmsPlantenInVoorraad.Size = new System.Drawing.Size(167, 48);
 			// 
 			// tsmiBewerkPlant
 			// 
 			this.tsmiBewerkPlant.Name = "tsmiBewerkPlant";
-			this.tsmiBewerkPlant.Size = new System.Drawing.Size(112, 22);
-			this.tsmiBewerkPlant.Text = "Bewerk";
+			this.tsmiBewerkPlant.Size = new System.Drawing.Size(166, 22);
+			this.tsmiBewerkPlant.Text = "Bewerk bestelling";
 			this.tsmiBewerkPlant.Click += new System.EventHandler(this.tsmiBewerkPlant_Click);
 			// 
 			// groupBox2
@@ -505,6 +507,13 @@
 			// 
 			this.columnHeader11.Text = "Opmerking";
 			this.columnHeader11.Width = 145;
+			// 
+			// bewerkBestelregelToolStripMenuItem
+			// 
+			this.bewerkBestelregelToolStripMenuItem.Name = "bewerkBestelregelToolStripMenuItem";
+			this.bewerkBestelregelToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+			this.bewerkBestelregelToolStripMenuItem.Text = "Bewerk bestelregel";
+			this.bewerkBestelregelToolStripMenuItem.Click += new System.EventHandler(this.bewerkBestelregelToolStripMenuItem_Click);
 			// 
 			// BestellingAddEdit
 			// 
@@ -597,5 +606,6 @@
 		private System.Windows.Forms.ColumnHeader columnHeader9;
 		private System.Windows.Forms.ColumnHeader columnHeader10;
 		private System.Windows.Forms.ColumnHeader columnHeader11;
+		private System.Windows.Forms.ToolStripMenuItem bewerkBestelregelToolStripMenuItem;
 	}
 }

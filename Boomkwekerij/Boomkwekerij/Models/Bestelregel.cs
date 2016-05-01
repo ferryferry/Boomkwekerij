@@ -41,17 +41,13 @@ namespace Boomkwekerij.Models
 		#endregion
 
 		#region Constructors
-		public Bestelregel(int id)
-		{
-			Id = id;
-		}
-
 		public Bestelregel(int id, Plant plant, int aantal, int prijs)
 		{
 			Id = id;
 			Plant = plant;
 			Aantal = aantal;
 			Prijs = prijs;
+			Leveringen = new ObservableCollection<Levering>();
 		}
 
 		public Bestelregel(int id, Plant plant, int aantal, int prijs, ObservableCollection<Levering> leveringen)
@@ -60,6 +56,10 @@ namespace Boomkwekerij.Models
 			Plant = plant;
 			Aantal = aantal;
 			Prijs = prijs;
+			if(leveringen == null)
+			{
+				leveringen = new ObservableCollection<Levering>();
+			}
 			Leveringen = leveringen;
 		}
 		#endregion

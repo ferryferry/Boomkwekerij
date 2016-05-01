@@ -22,7 +22,7 @@ namespace Boomkwekerij.Controllers.Contexts
 				new Bestelregel(1, new Plant(1), 40, 45,
 				new ObservableCollection<Levering>()
 				{
-					new Levering(1,20,DateTime.Now.AddDays(-2), true),
+					new Levering(1,10,DateTime.Now.AddDays(-2), true),
 					new Levering(2,20,DateTime.Now, true)
 				}),
 				new Bestelregel(2, new Plant(2), 40, 123, null),
