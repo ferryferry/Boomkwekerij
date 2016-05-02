@@ -1,5 +1,6 @@
 ﻿using Boomkwekerij.Models;
 using Boomkwekerij.Models.Conversion;
+using Boomkwekerij.Reporting;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -82,7 +83,7 @@ namespace Boomkwekerij.Views
 				Bestelling.Besteldatum = DateTime.Now;
 				Bestelling.ToeslagPercentage = ToeslagPercentage.GetValidToeslagPercentageForDate(Bestelling.Besteldatum);
 				Bestelling.Besteldatum = DateTime.Now;
-				Bestelling.Klant = (Klant)cbKlant.SelectedItem;
+				
 				Bestelling.ToeslagPercentage = ToeslagPercentage.GetValidToeslagPercentageForDate(Bestelling.Besteldatum);
 				formmode = Formmode.add;
 				Width = 545;
@@ -137,6 +138,7 @@ namespace Boomkwekerij.Views
 		{
 			if (validateFieldsToOrder())
 			{
+				Bestelling.Klant = (Klant)cbKlant.SelectedItem;
 				DialogResult = DialogResult.OK;
 			}
 		}
@@ -272,8 +274,8 @@ namespace Boomkwekerij.Views
 			{
 				foreach (Bestelregel bestelregel in Bestelling.Bestelregels)
 				{
-					decimal prijs = Math.Round((bestelregel.Prijs / 100M), 3);
-					ListViewItem item = new ListViewItem(new string[] { bestelregel.Aantal + " x", bestelregel.Plant.Naam, EnumDescriptionConverter.GetDescriptionFromEnum(bestelregel.Plant.PlantGrootte), bestelregel.Plant.Jaren(), string.Format("€ {0:0.00}", prijs), string.Format("€ {0:0.00}", (prijs * bestelregel.Aantal)) });
+					//decimal prijs = Math.Round((bestelregel.Prijs / 100M), 3);
+					ListViewItem item = new ListViewItem(new string[] { bestelregel.Aantal + " x", bestelregel.Plant.Naam, EnumDescriptionConverter.GetDescriptionFromEnum(bestelregel.Plant.PlantGrootte), bestelregel.Plant.Jaren(), bestelregel.GetPrijsPerStuk(), bestelregel.GetBestelregelPrijs() });
 					item.Tag = bestelregel;
 					lvPlantenInBestelling.Items.Add(item);
 				}
@@ -345,5 +347,11 @@ namespace Boomkwekerij.Views
 			}
 		}
 		#endregion
+
+		private void btnMaakFactuur_Click(object sender, EventArgs e)
+		{
+			Factuur factuur = new Factuur();
+			factuur.Maak(Bestelling, "Roelands Boomkwekerij", "Laarakkerstraat", "4881 WK", "Zundert", "0765974432", "0765974432", "0633221223", "roelandskwekerij@live.nl", "NL30RABO0188624163", "NLBTW12345KKW", "NLKVK12345KKW", Bestelling.Id + ".pdf");
+		}
 	}
 }

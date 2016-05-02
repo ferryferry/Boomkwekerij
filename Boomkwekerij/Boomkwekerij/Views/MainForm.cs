@@ -91,7 +91,7 @@ namespace Boomkwekerij
 						aantalGeleverd += levering.Aantal;
 					}
 				}
-				ListViewItem item = new ListViewItem(new string[] { bestelregel.Plant.Naam, bestelregel.Aantal.ToString(), aantalGeleverd.ToString() + " x", bestelregel.Prijs.ToString(), EnumDescriptionConverter.GetDescriptionFromEnum(bestelregel.Plant.PlantGrootte), bestelregel.Plant.Jaren(), bestelregel.Plant.Opmerking });
+				ListViewItem item = new ListViewItem(new string[] { bestelregel.Plant.Naam, bestelregel.Aantal.ToString(), aantalGeleverd.ToString() + " x", bestelregel.GetPrijsPerStuk(), EnumDescriptionConverter.GetDescriptionFromEnum(bestelregel.Plant.PlantGrootte), bestelregel.Plant.Jaren(), bestelregel.Plant.Opmerking });
 				if(bestelregel.Aantal > aantalGeleverd)
 				{
 					item.BackColor = Color.MistyRose;

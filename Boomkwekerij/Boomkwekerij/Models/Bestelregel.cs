@@ -78,5 +78,19 @@ namespace Boomkwekerij.Models
 			return true;
 		}
 		#endregion
+
+		#region Methods
+		public string GetPrijsPerStuk()
+		{
+			decimal prijs = Math.Round((Prijs / 100M), 3);
+			return string.Format("€ {0:0.00}", prijs);
+		}
+
+		public string GetBestelregelPrijs()
+		{
+			decimal prijs = Math.Round((Prijs / 100M), 3);
+			return string.Format("€ {0:0.00}", (prijs * Aantal));
+		}
+		#endregion
 	}
 }

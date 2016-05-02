@@ -41,6 +41,7 @@
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.cmsPlantenVoorBestelling = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.tsmiVerwijderUitBestelling = new System.Windows.Forms.ToolStripMenuItem();
+			this.bewerkBestelregelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.lblGeselecteerdePlant = new System.Windows.Forms.Label();
 			this.nudAantal = new System.Windows.Forms.NumericUpDown();
 			this.label4 = new System.Windows.Forms.Label();
@@ -69,13 +70,7 @@
 			this.cmsPlantenInVoorraad = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.tsmiBewerkPlant = new System.Windows.Forms.ToolStripMenuItem();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.listView1 = new System.Windows.Forms.ListView();
-			this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.bewerkBestelregelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnMaakFactuur = new System.Windows.Forms.Button();
 			this.cmsPlantenVoorBestelling.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nudAantal)).BeginInit();
 			this.groupBox1.SuspendLayout();
@@ -190,6 +185,13 @@
 			this.tsmiVerwijderUitBestelling.Size = new System.Drawing.Size(206, 22);
 			this.tsmiVerwijderUitBestelling.Text = "Verwijderen uit bestelling";
 			this.tsmiVerwijderUitBestelling.Click += new System.EventHandler(this.tsmiVerwijderUitBestelling_Click);
+			// 
+			// bewerkBestelregelToolStripMenuItem
+			// 
+			this.bewerkBestelregelToolStripMenuItem.Name = "bewerkBestelregelToolStripMenuItem";
+			this.bewerkBestelregelToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+			this.bewerkBestelregelToolStripMenuItem.Text = "Bewerk bestelregel";
+			this.bewerkBestelregelToolStripMenuItem.Click += new System.EventHandler(this.bewerkBestelregelToolStripMenuItem_Click);
 			// 
 			// lblGeselecteerdePlant
 			// 
@@ -442,7 +444,7 @@
 			this.cmsPlantenInVoorraad.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiBewerkPlant});
 			this.cmsPlantenInVoorraad.Name = "cmsVoorraad";
-			this.cmsPlantenInVoorraad.Size = new System.Drawing.Size(167, 48);
+			this.cmsPlantenInVoorraad.Size = new System.Drawing.Size(167, 26);
 			// 
 			// tsmiBewerkPlant
 			// 
@@ -453,67 +455,23 @@
 			// 
 			// groupBox2
 			// 
-			this.groupBox2.Controls.Add(this.listView1);
+			this.groupBox2.Controls.Add(this.btnMaakFactuur);
 			this.groupBox2.Location = new System.Drawing.Point(532, 12);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(640, 611);
+			this.groupBox2.Size = new System.Drawing.Size(640, 173);
 			this.groupBox2.TabIndex = 26;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Facturatie";
 			// 
-			// listView1
+			// btnMaakFactuur
 			// 
-			this.listView1.AllowColumnReorder = true;
-			this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader7,
-            this.columnHeader8,
-            this.columnHeader9,
-            this.columnHeader10,
-            this.columnHeader11});
-			this.listView1.FullRowSelect = true;
-			this.listView1.Location = new System.Drawing.Point(5, 19);
-			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(628, 586);
-			this.listView1.Sorting = System.Windows.Forms.SortOrder.Ascending;
-			this.listView1.TabIndex = 16;
-			this.listView1.UseCompatibleStateImageBehavior = false;
-			this.listView1.View = System.Windows.Forms.View.Details;
-			// 
-			// columnHeader7
-			// 
-			this.columnHeader7.Text = "Aantal";
-			// 
-			// columnHeader8
-			// 
-			this.columnHeader8.Text = "Plant";
-			this.columnHeader8.Width = 120;
-			// 
-			// columnHeader9
-			// 
-			this.columnHeader9.Text = "Lengte";
-			this.columnHeader9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.columnHeader9.Width = 80;
-			// 
-			// columnHeader10
-			// 
-			this.columnHeader10.Text = "Leeftijd";
-			this.columnHeader10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.columnHeader10.Width = 80;
-			// 
-			// columnHeader11
-			// 
-			this.columnHeader11.Text = "Opmerking";
-			this.columnHeader11.Width = 145;
-			// 
-			// bewerkBestelregelToolStripMenuItem
-			// 
-			this.bewerkBestelregelToolStripMenuItem.Name = "bewerkBestelregelToolStripMenuItem";
-			this.bewerkBestelregelToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-			this.bewerkBestelregelToolStripMenuItem.Text = "Bewerk bestelregel";
-			this.bewerkBestelregelToolStripMenuItem.Click += new System.EventHandler(this.bewerkBestelregelToolStripMenuItem_Click);
+			this.btnMaakFactuur.Location = new System.Drawing.Point(6, 19);
+			this.btnMaakFactuur.Name = "btnMaakFactuur";
+			this.btnMaakFactuur.Size = new System.Drawing.Size(91, 23);
+			this.btnMaakFactuur.TabIndex = 34;
+			this.btnMaakFactuur.Text = "Maak factuur";
+			this.btnMaakFactuur.UseVisualStyleBackColor = true;
+			this.btnMaakFactuur.Click += new System.EventHandler(this.btnMaakFactuur_Click);
 			// 
 			// BestellingAddEdit
 			// 
@@ -600,12 +558,7 @@
 		private System.Windows.Forms.ContextMenuStrip cmsPlantenInVoorraad;
 		private System.Windows.Forms.ToolStripMenuItem tsmiBewerkPlant;
 		private System.Windows.Forms.GroupBox groupBox2;
-		private System.Windows.Forms.ListView listView1;
-		private System.Windows.Forms.ColumnHeader columnHeader7;
-		private System.Windows.Forms.ColumnHeader columnHeader8;
-		private System.Windows.Forms.ColumnHeader columnHeader9;
-		private System.Windows.Forms.ColumnHeader columnHeader10;
-		private System.Windows.Forms.ColumnHeader columnHeader11;
 		private System.Windows.Forms.ToolStripMenuItem bewerkBestelregelToolStripMenuItem;
+		private System.Windows.Forms.Button btnMaakFactuur;
 	}
 }

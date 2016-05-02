@@ -126,6 +126,11 @@ namespace Boomkwekerij.Models
 			return Math.Round((prijs / 100M), 3);
 		}
 
+		public string FormattedToeslagBedrag()
+		{
+			return string.Format("€ {0:0.00}", BerekenTotaalprijs()-BerekenTotaalprijsEx());
+		}
+
 		public string FormattedPrijsEx()
 		{
 			return string.Format("€ {0:0.00}", BerekenTotaalprijsEx());
