@@ -13,7 +13,7 @@ namespace Boomkwekerij
 		{
 			if (File.Exists(fileNmae))
 			{
-				ConnectionString = "Data Source=" + fileNmae + ";Version=3";
+				ConnectionString = "Data Source=" + fileNmae + ";foreign keys=true;";
 			}
 			else
 			{

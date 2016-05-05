@@ -50,9 +50,9 @@ namespace Boomkwekerij.Models
 			KvkNummer = kvkNummer;
 
 			// Initialize Repositories with Contexts
-			klantRepo = new KlantRepository(new KlantMemoryContext(true));
-			bestellingRepo = new BestellingRepository(new BestellingMemoryContext(true));
-			plantRepo = new PlantRepository(new PlantMemoryContext(true));
+			klantRepo = new KlantRepository(new KlantSQLiteContext());
+			bestellingRepo = new BestellingRepository(new BestellingSQLiteContext());
+			plantRepo = new PlantRepository(new PlantSQLiteContext());
 
 			// Initialize Lists
 			Klanten = new ObservableCollection<Klant>(klantRepo.GetAll());
@@ -86,6 +86,13 @@ namespace Boomkwekerij.Models
 			foreach (Bestelling bestelling in Bestellingen)
 			{
 				bestelling.PropertyChanged += ItemPropertyChanged;
+				foreach(Bestelregel bestelregel in bestelling.Bestelregels)
+				{
+					foreach(Levering levering in bestelregel.Leveringen)
+					{
+						levering.PropertyChanged += ItemPropertyChanged;
+					}
+				}
 			}
 		}
 
@@ -123,7 +130,13 @@ namespace Boomkwekerij.Models
 					}
 					else if (item is Klant)
 					{
-						klantRepo.Remove((Klant)item);
+						if (!klantRepo.Remove((Klant)item))
+						{
+							Klanten.CollectionChanged -= ObservableListCollection_CollectionChanged;
+							Klanten.Add((Klant)item);
+							Klanten.CollectionChanged += ObservableListCollection_CollectionChanged;
+							System.Windows.Forms.MessageBox.Show("Deze klant kan niet worden verwijderd omdat er geregistreerde bestellingen in het systeem staan voor deze klant.","Klant kan niet worden verwijderd!",System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error);
+						}
 					}
 					else if (item is Bestelling)
 					{

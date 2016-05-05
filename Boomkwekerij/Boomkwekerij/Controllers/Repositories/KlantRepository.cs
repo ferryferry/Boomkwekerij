@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Boomkwekerij.Controllers.Interfaces;
 using Boomkwekerij.Models;
 using Boomkwekerij.Controllers.Contexts;
+using System.Collections.ObjectModel;
 
 namespace Boomkwekerij.Controllers.Repositories
 {
@@ -27,7 +28,7 @@ namespace Boomkwekerij.Controllers.Repositories
 			return context.Get(id);
 		}
 
-		public List<Klant> GetAll()
+		public ObservableCollection<Klant> GetAll()
 		{
 			return context.GetAll();
 		}

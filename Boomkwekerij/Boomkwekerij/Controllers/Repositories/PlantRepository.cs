@@ -2,6 +2,7 @@
 using Boomkwekerij.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace Boomkwekerij.Controllers.Repositories
 			return context.Get(id);
 		}
 
-		public List<Plant> GetAll()
+		public ObservableCollection<Plant> GetAll()
 		{
 			return context.GetAll();
 		}

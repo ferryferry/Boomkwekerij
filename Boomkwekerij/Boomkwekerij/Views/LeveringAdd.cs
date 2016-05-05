@@ -42,7 +42,7 @@ namespace Boomkwekerij.Views
 
 		private void checkBestaandeleveringenVoorZelfdeDag()
 		{
-			foreach (Bestelregel br in bestelling.Bestelregels.FindAll(br => br.Plant.Id == bestelregel.Plant.Id && br.Leveringen != null))
+			foreach (Bestelregel br in bestelling.Bestelregels.Where(br => br.Plant.Id == bestelregel.Plant.Id && br.Leveringen != null))
 			{
 				foreach (Levering lev in br.Leveringen)
 				{

@@ -29,7 +29,7 @@ namespace Boomkwekerij.Views
 		private ObservableCollection<Klant> klanten;
 
 		private Plant geselecteerdePlant;
-		private List<Bestelregel> backupBestelregels;
+		private ObservableCollection<Bestelregel> backupBestelregels;
 		private int errorCount;
 
 		private bool isEdited;
@@ -61,7 +61,7 @@ namespace Boomkwekerij.Views
 				formmode = Formmode.edit;
 				Width = 1200;
 
-				backupBestelregels = new List<Bestelregel>();
+				backupBestelregels = new ObservableCollection<Bestelregel>();
 				foreach(Bestelregel bestelregel in Bestelling.Bestelregels)
 				{
 					Plant plant = new Plant(bestelregel.Plant.Id, bestelregel.Plant.Naam, bestelregel.Plant.PlantGrootte, bestelregel.Plant.Zaailing, bestelregel.Plant.Verplant, bestelregel.Plant.Opmerking, bestelregel.Plant.Voorraad);
@@ -350,6 +350,7 @@ namespace Boomkwekerij.Views
 
 		private void btnMaakFactuur_Click(object sender, EventArgs e)
 		{
+			Bestelling.Factuurdatum = DateTime.Now;
 			Factuur factuur = new Factuur();
 			factuur.Maak(Bestelling, "Roelands Boomkwekerij", "Laarakkerstraat", "4881 WK", "Zundert", "0765974432", "0765974432", "0633221223", "roelandskwekerij@live.nl", "NL30RABO0188624163", "NLBTW12345KKW", "NLKVK12345KKW", Bestelling.Id + ".pdf");
 		}

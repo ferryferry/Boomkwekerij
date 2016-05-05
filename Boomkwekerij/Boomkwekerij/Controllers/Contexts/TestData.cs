@@ -10,14 +10,14 @@ namespace Boomkwekerij.Controllers.Contexts
 {
 	public static class TestData
 	{
-		public static List<Bestelling> GetBestellingen()
+		public static ObservableCollection<Bestelling> GetBestellingen()
 		{
 			List<ToeslagPercentage> toeslagPercentage = new List<ToeslagPercentage>();
 			toeslagPercentage.Add(new ToeslagPercentage(0, 1275, DateTime.Now.AddDays(-30), DateTime.Now.AddDays(-1)));
 			toeslagPercentage.Add(new ToeslagPercentage(1, 571, DateTime.Now.AddDays(-1)));
 
-			List<Bestelling> bestellingen = new List<Bestelling>();
-			bestellingen.Add(new Bestelling(1, DateTime.Now.AddDays(-4), DateTime.Now, DateTime.Now, toeslagPercentage[0], false, new Klant(1), new List<Bestelregel>()
+			ObservableCollection<Bestelling> bestellingen = new ObservableCollection<Bestelling>();
+			bestellingen.Add(new Bestelling(1, DateTime.Now.AddDays(-4), DateTime.Now, DateTime.Now, toeslagPercentage[0], false, new Klant(1), new ObservableCollection<Bestelregel>()
 			{
 				new Bestelregel(1, new Plant(1), 40, 45,
 				new ObservableCollection<Levering>()
@@ -29,28 +29,28 @@ namespace Boomkwekerij.Controllers.Contexts
 				new Bestelregel(3, new Plant(3), 40, 25, null),
 				new Bestelregel(4, new Plant(4), 40, 32, null),
 			}));
-			bestellingen.Add(new Bestelling(2, DateTime.Now.AddDays(-10), DateTime.Now.AddDays(-2), DateTime.Now, toeslagPercentage[0], false, new Klant(2), new List<Bestelregel>()
+			bestellingen.Add(new Bestelling(2, DateTime.Now.AddDays(-10), DateTime.Now.AddDays(-2), DateTime.Now, toeslagPercentage[0], false, new Klant(2), new ObservableCollection<Bestelregel>()
 			{
 				new Bestelregel(1, new Plant(3), 40, 45, null),
 				new Bestelregel(2, new Plant(4), 40, 23, null),
 				new Bestelregel(3, new Plant(5), 40, 25, null),
 				new Bestelregel(4, new Plant(6), 40, 32, null),
 			}));
-			bestellingen.Add(new Bestelling(3, DateTime.Now.AddDays(-4), DateTime.Now.AddDays(-3), DateTime.Now, toeslagPercentage[0], false, new Klant(3), new List<Bestelregel>()
+			bestellingen.Add(new Bestelling(3, DateTime.Now.AddDays(-4), DateTime.Now.AddDays(-3), DateTime.Now, toeslagPercentage[0], false, new Klant(3), new ObservableCollection<Bestelregel>()
 			{
 				new Bestelregel(1, new Plant(1), 40, 45, null),
 				new Bestelregel(2, new Plant(2), 40, 23, null),
 				new Bestelregel(3, new Plant(3), 40, 25, null),
 				new Bestelregel(4, new Plant(4), 40, 32, null),
 			}));
-			bestellingen.Add(new Bestelling(4, DateTime.Now.AddDays(-3), DateTime.Now.AddDays(-4), DateTime.Now, toeslagPercentage[0], false, new Klant(2), new List<Bestelregel>()
+			bestellingen.Add(new Bestelling(4, DateTime.Now.AddDays(-3), DateTime.Now.AddDays(-4), DateTime.Now, toeslagPercentage[0], false, new Klant(2), new ObservableCollection<Bestelregel>()
 			{
 				new Bestelregel(1, new Plant(3), 40, 45, null),
 				new Bestelregel(2, new Plant(2), 40, 23, null),
 				new Bestelregel(3, new Plant(4), 40, 25, null),
 				new Bestelregel(4, new Plant(1), 40, 32, null),
 			}));
-			bestellingen.Add(new Bestelling(5, DateTime.Now.AddDays(-5), DateTime.Now.AddDays(-5), DateTime.Now, toeslagPercentage[1], false, new Klant(1), new List<Bestelregel>()
+			bestellingen.Add(new Bestelling(5, DateTime.Now.AddDays(-5), DateTime.Now.AddDays(-5), DateTime.Now, toeslagPercentage[1], false, new Klant(1), new ObservableCollection<Bestelregel>()
 			{
 				new Bestelregel(1, new Plant(1), 40, 45, null),
 				new Bestelregel(2, new Plant(2), 40, 23, null),
@@ -60,9 +60,9 @@ namespace Boomkwekerij.Controllers.Contexts
 			return bestellingen;
 		}
 
-		public static List<Klant> GetKlanten()
+		public static ObservableCollection<Klant> GetKlanten()
 		{
-			List<Klant> klanten = new List<Klant>();
+			ObservableCollection<Klant> klanten = new ObservableCollection<Klant>();
 			klanten.Add(new Klant(1, "Ferry", "Rucphensestraat 69", "4711 JJ", "Sint Willebrord", "0165384747", "ferryjongmans@live.nl"));
 			klanten.Add(new Klant(2, "Kees", "Sterstraat 11", "5574 KK", "Zegge", "0092736352", "kees@live.nl"));
 			klanten.Add(new Klant(3, "Rick", "Dreefweg 83 ", "4772 KJ", "Oss", "3736253748", "rick@live.nl"));
@@ -70,9 +70,9 @@ namespace Boomkwekerij.Controllers.Contexts
 			return klanten;
 		}
 
-		public static List<Plant> GetPlanten()
+		public static ObservableCollection<Plant> GetPlanten()
 		{
-			List<Plant> planten = new List<Plant>();
+			ObservableCollection<Plant> planten = new ObservableCollection<Plant>();
 			planten.Add(new Plant(1, "Hortensia", Plant.Grootte.G2040, 2, 1, "Twee takken", 3000));
 			planten.Add(new Plant(2, "Viooltje", Plant.Grootte.G4060, 3, 1, "", 3000));
 			planten.Add(new Plant(3, "Orchidee", Plant.Grootte.G6080, 1, 1, "Met een grote bloem", 3000));

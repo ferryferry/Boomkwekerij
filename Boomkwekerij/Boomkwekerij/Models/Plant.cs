@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Boomkwekerij.Models.Conversion;
 using System.Runtime.CompilerServices;
+using System.Collections.ObjectModel;
 
 namespace Boomkwekerij.Models
 {
@@ -148,12 +149,12 @@ namespace Boomkwekerij.Models
 			return false;
 		}
 
-		public Bestelregel BestelPlant(int aantal, int prijs, List<Bestelregel> bestelregels)
+		public Bestelregel BestelPlant(int aantal, int prijs, ObservableCollection<Bestelregel> bestelregels)
 		{
 			if (CheckVoorraad(aantal))
 			{
 				Voorraad -= aantal;
-				if (bestelregels.Exists(br => br.Plant.Id == Id))
+				if (bestelregels.Where(br => br.Plant.Id == Id).Count()>1)
 				{
 					Bestelregel bestelregel = bestelregels.Single(br => br.Plant.Id == Id);
 					bestelregel.Aantal += aantal;

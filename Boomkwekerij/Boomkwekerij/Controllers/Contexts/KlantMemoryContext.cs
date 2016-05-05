@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using Boomkwekerij.Models;
 using Boomkwekerij.Controllers.Interfaces;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Boomkwekerij.Controllers.Contexts
 {
 	public class KlantMemoryContext : IContext<Klant>
 	{
-		private List<Klant> klanten;
+		private ObservableCollection<Klant> klanten;
 		public KlantMemoryContext(bool useTestData = false)
 		{
 			if (useTestData)
@@ -16,7 +18,7 @@ namespace Boomkwekerij.Controllers.Contexts
 			}
 			else
 			{
-				klanten = new List<Klant>();
+				klanten = new ObservableCollection<Klant>();
 			}
 		}
 
@@ -29,10 +31,10 @@ namespace Boomkwekerij.Controllers.Contexts
 
 		public Klant Get(int id)
 		{
-			return klanten.Find(k=>k.Id == id);
+			return klanten.Single(k=>k.Id == id);
 		}
 
-		public List<Klant> GetAll()
+		public ObservableCollection<Klant> GetAll()
 		{
 			return klanten;
 		}
@@ -47,7 +49,8 @@ namespace Boomkwekerij.Controllers.Contexts
 		{
 			try
 			{
-				klanten[klanten.FindIndex(k => k.Id == entity.Id)] = entity;
+				Klant klant = klanten.Single(k => k.Id == entity.Id);
+				klant = entity;
 				return true;
 			}
 			catch(Exception ex)

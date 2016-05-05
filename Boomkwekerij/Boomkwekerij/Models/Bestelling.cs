@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -60,8 +61,8 @@ namespace Boomkwekerij.Models
 			set { SetField(ref klant, value); }
 		}
 
-		private List<Bestelregel> bestelregels;
-		public List<Bestelregel> Bestelregels
+		private ObservableCollection<Bestelregel> bestelregels;
+		public ObservableCollection<Bestelregel> Bestelregels
 		{
 			get { return bestelregels; }
 			set { SetField(ref bestelregels, value); }
@@ -73,9 +74,9 @@ namespace Boomkwekerij.Models
 		public Bestelling(int id)
 		{
 			Id = id;
-			Bestelregels = new List<Bestelregel>();
+			Bestelregels = new ObservableCollection<Bestelregel>();
 		}
-		public Bestelling(int id, DateTime? besteldatum, DateTime? factuurdatum, DateTime? laatstAfgedrukt, ToeslagPercentage toeslagPercentage, bool betaald, Klant klant, List<Bestelregel> bestelregels)
+		public Bestelling(int id, DateTime? besteldatum, DateTime? factuurdatum, DateTime? laatstAfgedrukt, ToeslagPercentage toeslagPercentage, bool betaald, Klant klant, ObservableCollection<Bestelregel> bestelregels)
 		{
 			Id = id;
 			Besteldatum = besteldatum;
@@ -87,8 +88,20 @@ namespace Boomkwekerij.Models
 			Bestelregels = bestelregels;
 			if(bestelregels == null)
 			{
-				Bestelregels = new List<Bestelregel>();
+				Bestelregels = new ObservableCollection<Bestelregel>();
 			}
+			else
+			{
+				foreach(Bestelregel br in Bestelregels)
+				{
+					br.PropertyChanged += ItemPropertyChanged;
+				}
+			}
+		}
+
+		private void ItemPropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			OnPropertyChanged(e.PropertyName);
 		}
 		#endregion
 
@@ -140,6 +153,7 @@ namespace Boomkwekerij.Models
 		{
 			return string.Format("€ {0:0.00}", BerekenTotaalprijs());
 		}
+
 		#endregion
 	}
 }

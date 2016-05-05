@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 
 namespace Boomkwekerij.Controllers.Interfaces
 {
@@ -12,7 +8,7 @@ namespace Boomkwekerij.Controllers.Interfaces
 
 		T Get(int id);
 
-		List<T> GetAll();
+		ObservableCollection<T> GetAll();
 
 		bool Remove(T entity);
 

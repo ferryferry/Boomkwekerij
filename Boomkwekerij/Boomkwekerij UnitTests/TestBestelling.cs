@@ -24,7 +24,7 @@ namespace Boomkwekerij_UnitTests
 			toeslagPercentage.Add(new ToeslagPercentage(0, 1275, DateTime.Now.AddDays(-30), DateTime.Now.AddDays(-1)));
 			toeslagPercentage.Add(new ToeslagPercentage(1, 571, DateTime.Now.AddDays(-1)));
 
-			bestellingen.Add(new Bestelling(1, DateTime.Now.AddDays(-4), DateTime.Now, DateTime.Now, toeslagPercentage[0], false, new Klant(1), new List<Bestelregel>()
+			bestellingen.Add(new Bestelling(1, DateTime.Now.AddDays(-4), DateTime.Now, DateTime.Now, toeslagPercentage[0], false, new Klant(1), new ObservableCollection<Bestelregel>()
 			{
 				new Bestelregel(1, new Plant(1), 40, 45,
 				new ObservableCollection<Levering>()
@@ -37,12 +37,12 @@ namespace Boomkwekerij_UnitTests
 				new Bestelregel(4, new Plant(2), 40, 32),
 			}));
 
-			bestellingen.Add(new Bestelling(2, DateTime.Now.AddDays(-4), DateTime.Now, DateTime.Now, toeslagPercentage[0], false, new Klant(1), new List<Bestelregel>()
+			bestellingen.Add(new Bestelling(2, DateTime.Now.AddDays(-4), DateTime.Now, DateTime.Now, toeslagPercentage[0], false, new Klant(1), new ObservableCollection<Bestelregel>()
 			{
 				new Bestelregel(1, new Plant(1), 1, 100),
 			}));
 
-			bestellingen.Add(new Bestelling(3, DateTime.Now, DateTime.Now, DateTime.Now, toeslagPercentage[0], false, new Klant(1), new List<Bestelregel>()));
+			bestellingen.Add(new Bestelling(3, DateTime.Now, DateTime.Now, DateTime.Now, toeslagPercentage[0], false, new Klant(1), new ObservableCollection<Bestelregel>()));
 		}
 
 

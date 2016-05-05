@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace Boomkwekerij.Controllers.Repositories
 	{
 		T Insert(T entity);
 		T Get(int id);
-		List<T> GetAll();
+		ObservableCollection<T> GetAll();
 		bool Remove(T entity);
 		bool Update(T entity);
 	}

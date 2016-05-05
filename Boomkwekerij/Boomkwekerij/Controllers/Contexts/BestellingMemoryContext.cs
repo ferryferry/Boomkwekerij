@@ -12,7 +12,7 @@ namespace Boomkwekerij.Controllers.Contexts
 {
 	public class BestellingMemoryContext : IContext<Bestelling>
 	{
-		private List<Bestelling> bestellingen;
+		private ObservableCollection<Bestelling> bestellingen;
 
 		public BestellingMemoryContext(bool useTestData = false)
 		{
@@ -22,7 +22,7 @@ namespace Boomkwekerij.Controllers.Contexts
 			}
 			else
 			{
-				bestellingen = new List<Bestelling>();
+				bestellingen = new ObservableCollection<Bestelling>();
 			}
 		}
 
@@ -35,10 +35,10 @@ namespace Boomkwekerij.Controllers.Contexts
 
 		public Bestelling Get(int id)
 		{
-			return bestellingen.Find(b => b.Id == id);
+			return bestellingen.Single(b => b.Id == id);
 		}
 
-		public List<Bestelling> GetAll()
+		public ObservableCollection<Bestelling> GetAll()
 		{
 			return bestellingen;
 		}
@@ -53,7 +53,8 @@ namespace Boomkwekerij.Controllers.Contexts
 		{
 			try
 			{
-				bestellingen[bestellingen.FindIndex(k => k.Id == entity.Id)] = entity;
+				Bestelling bestelling = bestellingen.Single(b => b.Id == entity.Id);
+				bestelling = entity;
 				return true;
 			}
 			catch (Exception ex)
