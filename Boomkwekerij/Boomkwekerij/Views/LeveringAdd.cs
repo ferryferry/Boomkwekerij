@@ -30,7 +30,7 @@ namespace Boomkwekerij.Views
 
 			checkBestaandeleveringenVoorZelfdeDag();
 
-			if(levering != null)
+			if (levering != null)
 			{
 				nudAantal.Maximum = bestelregel.Aantal - gevondenLeveraantallen;
 			}
@@ -63,7 +63,12 @@ namespace Boomkwekerij.Views
 			}
 			else
 			{
-				bestelregel.Leveringen.Add(new Levering(0, Convert.ToInt32(nudAantal.Value), dtpLeverdatum.Value, true));
+				bool geleverd = false;
+				if(dtpLeverdatum.Value.Date <= DateTime.Now.Date)
+				{
+					geleverd = true;
+				}
+				bestelregel.Leveringen.Add(new Levering(0, Convert.ToInt32(nudAantal.Value), dtpLeverdatum.Value, geleverd));
 			}
 			
 			DialogResult = DialogResult.OK;

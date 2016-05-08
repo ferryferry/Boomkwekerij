@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Boomkwekerij.Models
 {
-	public sealed class Levering
+	public sealed class Levering : INotifyPropertyChanged
 	{
 		#region Properties
 		private int id;

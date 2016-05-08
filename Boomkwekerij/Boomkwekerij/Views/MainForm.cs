@@ -57,6 +57,7 @@ namespace Boomkwekerij
 
 		private void refreshGeselecteerdeBestellingInformatie()
 		{
+			btnLeverbon.Enabled = false;
 			lvLeveringen.Items.Clear();
 			lvPlantenInBestelling.Items.Clear();
 			foreach(Bestelregel bestelregel in geselecteerdeBestelling.Bestelregels)
@@ -68,7 +69,16 @@ namespace Boomkwekerij
 					{
 						ListViewItem item2 = new ListViewItem(new string[] { bestelregel.Plant.Naam, levering.Aantal.ToString(), levering.Leverdatum.ToString() });
 						item2.Tag = levering;
+						if (levering.Geleverd)
+						{
+							item2.BackColor = Color.LightGreen;
+						}
+						else
+						{
+							item2.BackColor = Color.MistyRose;
+						}
 						lvLeveringen.Items.Add(item2);
+						btnLeverbon.Enabled = true;
 						aantalGeleverd += levering.Aantal;
 					}
 				}
@@ -170,14 +180,18 @@ namespace Boomkwekerij
 
 		private void lvPlantenInBestelling_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == Keys.Delete)
+			if (lvPlantenInBestelling.SelectedItems.Count>0)
 			{
-				verwijderBestelregel();
+				if (e.KeyCode == Keys.Delete)
+				{
+					verwijderBestelregel();
+				}
+				else if (e.KeyCode == Keys.Enter)
+				{
+					showBestelRegelEditForm();
+				}
 			}
-			else if (e.KeyCode == Keys.Enter)
-			{
-				showBestelRegelEditForm();
-			}
+			
 		}
 
 		private void verwijderBestelregel()
@@ -293,6 +307,43 @@ namespace Boomkwekerij
 				}
 				refreshGeselecteerdeBestellingInformatie();
 			}
+		}
+
+		private void plantToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			PlantAddEdit plantAddForm = new PlantAddEdit(new Plant(0));
+			plantAddForm.ShowDialog();
+			if(plantAddForm.DialogResult == DialogResult.OK)
+			{
+				kwekerij.Planten.Add(plantAddForm.Plant);
+			}
+		}
+
+		private void tsmiChangeStatus_Click(object sender, EventArgs e)
+		{
+			if (tsmiChangeStatus.Checked)
+			{
+				((Levering)lvLeveringen.SelectedItems[0].Tag).Geleverd = false;
+				tsmiChangeStatus.Checked = false;
+				lvLeveringen.SelectedItems[0].BackColor = Color.MistyRose;
+			}
+			else
+			{
+				((Levering)lvLeveringen.SelectedItems[0].Tag).Geleverd = true;
+				tsmiChangeStatus.Checked = true;
+				lvLeveringen.SelectedItems[0].BackColor = Color.LightGreen;
+			}
+		}
+
+		private void lvLeveringen_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+		{
+			tsmiChangeStatus.Checked = ((Levering)e.Item.Tag).Geleverd;
+		}
+
+		private void btnLeverbon_Click(object sender, EventArgs e)
+		{
+			LeverbonPrint LeverbonPrintForm = new LeverbonPrint(geselecteerdeBestelling);
+			LeverbonPrintForm.ShowDialog();
 		}
 	}
 }

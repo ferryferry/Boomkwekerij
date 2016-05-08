@@ -61,17 +61,98 @@ namespace Boomkwekerij.Controllers.Contexts
 
 		public Plant Insert(Plant entity)
 		{
-			throw new NotImplementedException();
+			using (SQLiteConnection connection = db.Connection)
+			{
+				string query = @"INSERT INTO Plant 	VALUES (null, :naam, :plant_grootte_id, :zaailing, :verplant, :opmerking, :voorraad)";
+				using (SQLiteCommand command = new SQLiteCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("naam", entity.Naam);
+					command.Parameters.AddWithValue("plant_grootte_id", ConvertPlantGrootte.GetPlantGrootteId(entity.PlantGrootte));
+					command.Parameters.AddWithValue("zaailing", entity.Zaailing);
+					command.Parameters.AddWithValue("verplant", entity.Verplant);
+					command.Parameters.AddWithValue("opmerking", entity.Opmerking);
+					command.Parameters.AddWithValue("voorraad", entity.Voorraad);
+					try
+					{
+						//command.ExecuteNonQuery();
+						command.ExecuteScalar(System.Data.CommandBehavior.KeyInfo);
+						entity.Id = db.getLastInsertedId(connection);
+						return entity;
+					}
+					catch (SQLiteException e)
+					{
+						// If a PK constraint was violated, handle the exception
+						if (e.ResultCode == SQLiteErrorCode.Constraint)
+						{
+							return entity;
+						}
+
+						// Unexpected error: rethrow to let the caller handle it
+						throw;
+					}
+				}
+			}
 		}
 
 		public bool Remove(Plant entity)
 		{
-			throw new NotImplementedException();
+			using (SQLiteConnection connection = db.Connection)
+			{
+				string query = string.Format("DELETE FROM PLANT WHERE ID = {0};", entity.Id);
+				using (SQLiteCommand command = new SQLiteCommand(query, connection))
+				{
+					try
+					{
+						command.ExecuteNonQuery();
+						return true;
+					}
+					catch (SQLiteException e)
+					{
+						if (e.ResultCode == SQLiteErrorCode.Constraint)
+						{
+							return false;
+						}
+						throw;
+					}
+				}
+			}
 		}
 
 		public bool Update(Plant entity)
 		{
-			throw new NotImplementedException();
+			using (SQLiteConnection connection = db.Connection)
+			{
+				string query = string.Format(@"UPDATE Plant
+								SET naam=:naam,plant_grootte_id=:plant_grootte_id,zaailing=:zaailing,verplant=:verplant,opmerking=:opmerking,voorraad=:voorraad
+								WHERE id = {0};", entity.Id);
+				using (SQLiteCommand command = new SQLiteCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("naam", entity.Naam);
+					command.Parameters.AddWithValue("plant_grootte_id", ConvertPlantGrootte.GetPlantGrootteId(entity.PlantGrootte));
+					command.Parameters.AddWithValue("zaailing", entity.Zaailing);
+					command.Parameters.AddWithValue("verplant", entity.Verplant);
+					command.Parameters.AddWithValue("opmerking", entity.Opmerking);
+					command.Parameters.AddWithValue("voorraad", entity.Voorraad);
+					try
+					{
+						//command.ExecuteNonQuery();
+						var key = command.ExecuteScalar(System.Data.CommandBehavior.KeyInfo);
+
+						return true;
+					}
+					catch (SQLiteException e)
+					{
+						// If a PK constraint was violated, handle the exception
+						if (e.ResultCode == SQLiteErrorCode.Constraint)
+						{
+							return false;
+						}
+
+						// Unexpected error: rethrow to let the caller handle it
+						throw;
+					}
+				}
+			}
 		}
 	}
 }

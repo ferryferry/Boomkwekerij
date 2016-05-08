@@ -20,5 +20,10 @@ namespace Boomkwekerij.Models.Conversion
 		{
 			return EnumDescriptionConverter.GetEnumFromDescription<Plant.Grootte>(minGrootte.ToString() + " - " + maxGrootte.ToString());
 		}
+
+		public static int GetPlantGrootteId(Plant.Grootte plantGrootte)
+		{
+			return (int)plantGrootte + 1;
+		}
 	}
 }

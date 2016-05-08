@@ -43,6 +43,7 @@ namespace Boomkwekerij.Views
 			Bestelling = bestelling;
 			this.planten = planten;
 			this.klanten = klanten;
+			chkBetaald.Checked = bestelling.Betaald;
 		}
 		#endregion
 
@@ -353,6 +354,11 @@ namespace Boomkwekerij.Views
 			Bestelling.Factuurdatum = DateTime.Now;
 			Factuur factuur = new Factuur();
 			factuur.Maak(Bestelling, "Roelands Boomkwekerij", "Laarakkerstraat", "4881 WK", "Zundert", "0765974432", "0765974432", "0633221223", "roelandskwekerij@live.nl", "NL30RABO0188624163", "NLBTW12345KKW", "NLKVK12345KKW", Bestelling.Id + ".pdf");
+		}
+
+		private void chkBetaald_CheckedChanged(object sender, EventArgs e)
+		{
+			Bestelling.Betaald = chkBetaald.Checked;
 		}
 	}
 }

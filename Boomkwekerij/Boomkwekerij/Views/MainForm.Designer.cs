@@ -49,26 +49,28 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.txtFilter = new System.Windows.Forms.TextBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.gbLeveringen = new System.Windows.Forms.GroupBox();
-			this.lvLeveringen = new System.Windows.Forms.ListView();
-			this.chAantalGeleverd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.chLeverdatum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.lvPlantenInBestelling = new System.Windows.Forms.ListView();
 			this.chPlant = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.chAantalBesteld = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.chAantelGeleverd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.chPrijs = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.chGrootte = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.chJaren = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.chOpmerking = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.gbLeveringen = new System.Windows.Forms.GroupBox();
+			this.btnLeverbon = new System.Windows.Forms.Button();
+			this.btnLeverAlles = new System.Windows.Forms.Button();
+			this.lvLeveringen = new System.Windows.Forms.ListView();
+			this.chPlantLever = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.chAantalGeleverd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.chLeverdatum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.cmsPlantenVoorBestelling = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.tsmiMaakLevering = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiVerwijderUitBestelling = new System.Windows.Forms.ToolStripMenuItem();
 			this.cmsBestellingen = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.bewerkBestellingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiMaakLevering = new System.Windows.Forms.ToolStripMenuItem();
-			this.chPlantLever = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.chAantelGeleverd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.btnLeverAlles = new System.Windows.Forms.Button();
 			this.cmsLeveringen = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.tsmiChangeStatus = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiVerwijderLevering = new System.Windows.Forms.ToolStripMenuItem();
 			this.msMain.SuspendLayout();
 			this.groupBox1.SuspendLayout();
@@ -126,6 +128,7 @@
 			this.plantToolStripMenuItem.Name = "plantToolStripMenuItem";
 			this.plantToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
 			this.plantToolStripMenuItem.Text = "Plant";
+			this.plantToolStripMenuItem.Click += new System.EventHandler(this.plantToolStripMenuItem_Click);
 			// 
 			// beheerToolStripMenuItem
 			// 
@@ -241,50 +244,6 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Geselecteerde bestelling informatie";
 			// 
-			// gbLeveringen
-			// 
-			this.gbLeveringen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.gbLeveringen.Controls.Add(this.btnLeverAlles);
-			this.gbLeveringen.Controls.Add(this.lvLeveringen);
-			this.gbLeveringen.Enabled = false;
-			this.gbLeveringen.Location = new System.Drawing.Point(653, 19);
-			this.gbLeveringen.Name = "gbLeveringen";
-			this.gbLeveringen.Size = new System.Drawing.Size(451, 248);
-			this.gbLeveringen.TabIndex = 15;
-			this.gbLeveringen.TabStop = false;
-			this.gbLeveringen.Text = "Leveringen";
-			// 
-			// lvLeveringen
-			// 
-			this.lvLeveringen.AllowColumnReorder = true;
-			this.lvLeveringen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.lvLeveringen.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chPlantLever,
-            this.chAantalGeleverd,
-            this.chLeverdatum});
-			this.lvLeveringen.FullRowSelect = true;
-			this.lvLeveringen.Location = new System.Drawing.Point(6, 48);
-			this.lvLeveringen.Name = "lvLeveringen";
-			this.lvLeveringen.Size = new System.Drawing.Size(439, 194);
-			this.lvLeveringen.Sorting = System.Windows.Forms.SortOrder.Ascending;
-			this.lvLeveringen.TabIndex = 13;
-			this.lvLeveringen.UseCompatibleStateImageBehavior = false;
-			this.lvLeveringen.View = System.Windows.Forms.View.Details;
-			this.lvLeveringen.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvLeveringen_MouseClick);
-			// 
-			// chAantalGeleverd
-			// 
-			this.chAantalGeleverd.Text = "Aantal";
-			this.chAantalGeleverd.Width = 90;
-			// 
-			// chLeverdatum
-			// 
-			this.chLeverdatum.Text = "Leverdatum";
-			this.chLeverdatum.Width = 133;
-			// 
 			// lvPlantenInBestelling
 			// 
 			this.lvPlantenInBestelling.AllowColumnReorder = true;
@@ -320,6 +279,11 @@
 			// 
 			this.chAantalBesteld.Text = "Aantal";
 			// 
+			// chAantelGeleverd
+			// 
+			this.chAantelGeleverd.Text = "Aantal geleverd";
+			this.chAantelGeleverd.Width = 91;
+			// 
 			// chPrijs
 			// 
 			this.chPrijs.Text = "Prijs";
@@ -341,6 +305,78 @@
 			this.chOpmerking.Text = "Opmerking";
 			this.chOpmerking.Width = 138;
 			// 
+			// gbLeveringen
+			// 
+			this.gbLeveringen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gbLeveringen.Controls.Add(this.btnLeverbon);
+			this.gbLeveringen.Controls.Add(this.btnLeverAlles);
+			this.gbLeveringen.Controls.Add(this.lvLeveringen);
+			this.gbLeveringen.Enabled = false;
+			this.gbLeveringen.Location = new System.Drawing.Point(653, 19);
+			this.gbLeveringen.Name = "gbLeveringen";
+			this.gbLeveringen.Size = new System.Drawing.Size(451, 248);
+			this.gbLeveringen.TabIndex = 15;
+			this.gbLeveringen.TabStop = false;
+			this.gbLeveringen.Text = "Leveringen";
+			// 
+			// btnLeverbon
+			// 
+			this.btnLeverbon.Enabled = false;
+			this.btnLeverbon.Location = new System.Drawing.Point(349, 19);
+			this.btnLeverbon.Name = "btnLeverbon";
+			this.btnLeverbon.Size = new System.Drawing.Size(96, 23);
+			this.btnLeverbon.TabIndex = 15;
+			this.btnLeverbon.Text = "Maak leverbon";
+			this.btnLeverbon.UseVisualStyleBackColor = true;
+			this.btnLeverbon.Click += new System.EventHandler(this.btnLeverbon_Click);
+			// 
+			// btnLeverAlles
+			// 
+			this.btnLeverAlles.Location = new System.Drawing.Point(6, 19);
+			this.btnLeverAlles.Name = "btnLeverAlles";
+			this.btnLeverAlles.Size = new System.Drawing.Size(75, 23);
+			this.btnLeverAlles.TabIndex = 14;
+			this.btnLeverAlles.Text = "Lever alles";
+			this.btnLeverAlles.UseVisualStyleBackColor = true;
+			this.btnLeverAlles.Click += new System.EventHandler(this.btnLeverAlles_Click);
+			// 
+			// lvLeveringen
+			// 
+			this.lvLeveringen.AllowColumnReorder = true;
+			this.lvLeveringen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.lvLeveringen.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chPlantLever,
+            this.chAantalGeleverd,
+            this.chLeverdatum});
+			this.lvLeveringen.FullRowSelect = true;
+			this.lvLeveringen.Location = new System.Drawing.Point(6, 48);
+			this.lvLeveringen.Name = "lvLeveringen";
+			this.lvLeveringen.Size = new System.Drawing.Size(439, 194);
+			this.lvLeveringen.Sorting = System.Windows.Forms.SortOrder.Ascending;
+			this.lvLeveringen.TabIndex = 13;
+			this.lvLeveringen.UseCompatibleStateImageBehavior = false;
+			this.lvLeveringen.View = System.Windows.Forms.View.Details;
+			this.lvLeveringen.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvLeveringen_ItemSelectionChanged);
+			this.lvLeveringen.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvLeveringen_MouseClick);
+			// 
+			// chPlantLever
+			// 
+			this.chPlantLever.Text = "Plant";
+			this.chPlantLever.Width = 162;
+			// 
+			// chAantalGeleverd
+			// 
+			this.chAantalGeleverd.Text = "Aantal";
+			this.chAantalGeleverd.Width = 90;
+			// 
+			// chLeverdatum
+			// 
+			this.chLeverdatum.Text = "Leverdatum";
+			this.chLeverdatum.Width = 133;
+			// 
 			// cmsPlantenVoorBestelling
 			// 
 			this.cmsPlantenVoorBestelling.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -348,6 +384,13 @@
             this.tsmiVerwijderUitBestelling});
 			this.cmsPlantenVoorBestelling.Name = "cmsVoorraad";
 			this.cmsPlantenVoorBestelling.Size = new System.Drawing.Size(207, 48);
+			// 
+			// tsmiMaakLevering
+			// 
+			this.tsmiMaakLevering.Name = "tsmiMaakLevering";
+			this.tsmiMaakLevering.Size = new System.Drawing.Size(206, 22);
+			this.tsmiMaakLevering.Text = "Maak levering aan";
+			this.tsmiMaakLevering.Click += new System.EventHandler(this.tsmiMaakLevering_Click);
 			// 
 			// tsmiVerwijderUitBestelling
 			// 
@@ -370,44 +413,25 @@
 			this.bewerkBestellingToolStripMenuItem.Text = "Bewerk bestelling";
 			this.bewerkBestellingToolStripMenuItem.Click += new System.EventHandler(this.bewerkBestellingToolStripMenuItem_Click);
 			// 
-			// tsmiMaakLevering
-			// 
-			this.tsmiMaakLevering.Name = "tsmiMaakLevering";
-			this.tsmiMaakLevering.Size = new System.Drawing.Size(206, 22);
-			this.tsmiMaakLevering.Text = "Maak levering aan";
-			this.tsmiMaakLevering.Click += new System.EventHandler(this.tsmiMaakLevering_Click);
-			// 
-			// chPlantLever
-			// 
-			this.chPlantLever.Text = "Plant";
-			this.chPlantLever.Width = 162;
-			// 
-			// chAantelGeleverd
-			// 
-			this.chAantelGeleverd.Text = "Aantal geleverd";
-			this.chAantelGeleverd.Width = 91;
-			// 
-			// btnLeverAlles
-			// 
-			this.btnLeverAlles.Location = new System.Drawing.Point(6, 19);
-			this.btnLeverAlles.Name = "btnLeverAlles";
-			this.btnLeverAlles.Size = new System.Drawing.Size(75, 23);
-			this.btnLeverAlles.TabIndex = 14;
-			this.btnLeverAlles.Text = "Lever alles";
-			this.btnLeverAlles.UseVisualStyleBackColor = true;
-			this.btnLeverAlles.Click += new System.EventHandler(this.btnLeverAlles_Click);
-			// 
 			// cmsLeveringen
 			// 
 			this.cmsLeveringen.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiChangeStatus,
             this.tsmiVerwijderLevering});
 			this.cmsLeveringen.Name = "cmsBestellingen";
-			this.cmsLeveringen.Size = new System.Drawing.Size(168, 48);
+			this.cmsLeveringen.Size = new System.Drawing.Size(191, 48);
+			// 
+			// tsmiChangeStatus
+			// 
+			this.tsmiChangeStatus.Name = "tsmiChangeStatus";
+			this.tsmiChangeStatus.Size = new System.Drawing.Size(190, 22);
+			this.tsmiChangeStatus.Text = "Zet op status geleverd";
+			this.tsmiChangeStatus.Click += new System.EventHandler(this.tsmiChangeStatus_Click);
 			// 
 			// tsmiVerwijderLevering
 			// 
 			this.tsmiVerwijderLevering.Name = "tsmiVerwijderLevering";
-			this.tsmiVerwijderLevering.Size = new System.Drawing.Size(167, 22);
+			this.tsmiVerwijderLevering.Size = new System.Drawing.Size(190, 22);
 			this.tsmiVerwijderLevering.Text = "Verwijder levering";
 			this.tsmiVerwijderLevering.Click += new System.EventHandler(this.tsmiVerwijderLevering_Click);
 			// 
@@ -480,6 +504,8 @@
 		private System.Windows.Forms.Button btnLeverAlles;
 		private System.Windows.Forms.ContextMenuStrip cmsLeveringen;
 		private System.Windows.Forms.ToolStripMenuItem tsmiVerwijderLevering;
+		private System.Windows.Forms.Button btnLeverbon;
+		private System.Windows.Forms.ToolStripMenuItem tsmiChangeStatus;
 	}
 }
 

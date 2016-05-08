@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace Boomkwekerij.Models
 {
-	public class Bestelregel: INotifyPropertyChanged
+	public class Bestelregel : INotifyPropertyChanged
 	{
 		#region Properties
 		private int id;
@@ -56,11 +56,30 @@ namespace Boomkwekerij.Models
 			Plant = plant;
 			Aantal = aantal;
 			Prijs = prijs;
-			if(leveringen == null)
+			Leveringen = leveringen;
+			if (leveringen == null)
 			{
 				leveringen = new ObservableCollection<Levering>();
 			}
-			Leveringen = leveringen;
+			else
+			{
+				leveringen.CollectionChanged += Leveringen_CollectionChanged; ;
+				foreach (Levering br in leveringen)
+				{
+					br.PropertyChanged += Br_PropertyChanged; ;
+				}
+			}
+			
+		}
+
+		private void Br_PropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			OnPropertyChanged(e.PropertyName);
+		}
+
+		private void Leveringen_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+		{
+			OnPropertyChanged("Leveringen");
 		}
 		#endregion
 

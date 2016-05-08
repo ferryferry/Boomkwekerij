@@ -86,12 +86,10 @@ namespace Boomkwekerij.Models
 			foreach (Bestelling bestelling in Bestellingen)
 			{
 				bestelling.PropertyChanged += ItemPropertyChanged;
-				foreach(Bestelregel bestelregel in bestelling.Bestelregels)
+				bestelling.Bestelregels.CollectionChanged += ObservableListCollection_CollectionChanged;
+				foreach (Bestelregel bestelregel in bestelling.Bestelregels)
 				{
-					foreach(Levering levering in bestelregel.Leveringen)
-					{
-						levering.PropertyChanged += ItemPropertyChanged;
-					}
+					bestelregel.Leveringen.CollectionChanged += ObservableListCollection_CollectionChanged;
 				}
 			}
 		}
@@ -126,7 +124,13 @@ namespace Boomkwekerij.Models
 				{
 					if (item is Plant)
 					{
-						plantRepo.Remove((Plant)item);
+						if (!plantRepo.Remove((Plant)item))
+						{
+							Planten.CollectionChanged -= ObservableListCollection_CollectionChanged;
+							Planten.Add((Plant)item);
+							Planten.CollectionChanged += ObservableListCollection_CollectionChanged;
+							System.Windows.Forms.MessageBox.Show("Deze plant kan niet worden verwijderd. Er zijn bestellingen voor deze plant in het systeem!", "Fout!", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+						}
 					}
 					else if (item is Klant)
 					{
@@ -141,6 +145,14 @@ namespace Boomkwekerij.Models
 					else if (item is Bestelling)
 					{
 						bestellingRepo.Remove((Bestelling)item);
+					}
+					else if (item is Bestelregel)
+					{
+						bestellingRepo.Remove((Bestelregel)item);
+					}
+					else if (item is Levering)
+					{
+						bestellingRepo.Remove((Levering)item);
 					}
 					((INotifyPropertyChanged)item).PropertyChanged -= ItemPropertyChanged;
 				}

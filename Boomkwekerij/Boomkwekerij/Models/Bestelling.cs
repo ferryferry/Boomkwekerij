@@ -92,11 +92,27 @@ namespace Boomkwekerij.Models
 			}
 			else
 			{
+				bestelregels.CollectionChanged += Bestelregels_CollectionChanged;
 				foreach(Bestelregel br in Bestelregels)
 				{
 					br.PropertyChanged += ItemPropertyChanged;
+					br.Leveringen.CollectionChanged += Leveringen_CollectionChanged;
+					foreach(Levering l in br.Leveringen)
+					{
+						l.PropertyChanged += ItemPropertyChanged;
+					}
 				}
 			}
+		}
+
+		private void Leveringen_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+		{
+			OnPropertyChanged("Bestelregels");
+		}
+
+		private void Bestelregels_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+		{
+			OnPropertyChanged("Bestelregels");
 		}
 
 		private void ItemPropertyChanged(object sender, PropertyChangedEventArgs e)

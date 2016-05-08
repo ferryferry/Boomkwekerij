@@ -23,5 +23,13 @@ namespace Boomkwekerij_UnitTests
 			Plant.Grootte plantGrootte = ConvertPlantGrootte.Convert(120, 140);
 			Assert.AreEqual(Plant.Grootte.G120140, plantGrootte);
 		}
+
+		[TestMethod]
+		public void TestGetPlantGrootteId()
+		{
+			Assert.AreEqual(1, ConvertPlantGrootte.GetPlantGrootteId(Plant.Grootte.G0020));
+			Assert.AreEqual(2, ConvertPlantGrootte.GetPlantGrootteId(Plant.Grootte.G2040));
+			Assert.AreEqual(3, ConvertPlantGrootte.GetPlantGrootteId(Plant.Grootte.G4060));
+		}
 	}
 }

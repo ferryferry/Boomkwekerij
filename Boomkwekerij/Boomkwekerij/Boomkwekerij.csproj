@@ -95,8 +95,10 @@
     <Compile Include="Controllers\Contexts\PlantMemoryContext.cs" />
     <Compile Include="Controllers\Contexts\PlantSQLiteContext.cs" />
     <Compile Include="Controllers\Contexts\TestData.cs" />
+    <Compile Include="Controllers\Interfaces\IBestellingContext.cs" />
     <Compile Include="Controllers\Interfaces\IContext.cs" />
     <Compile Include="Controllers\Repositories\BestellingRepository.cs" />
+    <Compile Include="Controllers\Repositories\IBestellingRepository.cs" />
     <Compile Include="Controllers\Repositories\IRepository.cs" />
     <Compile Include="Controllers\Repositories\KlantRepository.cs" />
     <Compile Include="Controllers\Repositories\PlantRepository.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="Models\Conversion\ConvertPlantGrootte.cs" />
     <Compile Include="Models\Conversion\EnumDescriptionConverter.cs" />
     <Compile Include="Models\ToeslagPercentage.cs" />
+    <Compile Include="Reporting\Afleverbon.cs" />
     <Compile Include="Reporting\Factuur.cs" />
     <Compile Include="Sorting\ListViewItemComparer.cs" />
     <Compile Include="Views\BestellingAddEdit.cs">
@@ -131,6 +134,12 @@
     </Compile>
     <Compile Include="Views\Klantbeheer.Designer.cs">
       <DependentUpon>Klantbeheer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LeverbonPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\LeverbonPrint.Designer.cs">
+      <DependentUpon>LeverbonPrint.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\LeveringAdd.cs">
       <SubType>Form</SubType>
@@ -174,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Klantbeheer.resx">
       <DependentUpon>Klantbeheer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\LeverbonPrint.resx">
+      <DependentUpon>LeverbonPrint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LeveringAdd.resx">
       <DependentUpon>LeveringAdd.cs</DependentUpon>

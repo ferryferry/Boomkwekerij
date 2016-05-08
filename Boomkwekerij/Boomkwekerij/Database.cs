@@ -1,6 +1,7 @@
 ﻿using System.Data.SQLite;
 using System.IO;
 using Boomkwekerij.Exceptions;
+using System;
 
 namespace Boomkwekerij
 {
@@ -33,6 +34,23 @@ namespace Boomkwekerij
 				connection.Open();
 				return connection;
 			}
+		}
+
+		public int getLastInsertedId(SQLiteConnection connection)
+		{
+			int id = 0;
+			string query = string.Format("select last_insert_rowid() as id;");
+			using (SQLiteCommand command = new SQLiteCommand(query, connection))
+			{
+				using (SQLiteDataReader reader = command.ExecuteReader())
+				{
+					while (reader.Read())
+					{
+						id = Convert.ToInt32(reader["ID"]);
+					}
+				}
+			}
+			return id;
 		}
 	}
 }

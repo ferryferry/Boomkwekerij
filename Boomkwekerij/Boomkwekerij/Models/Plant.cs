@@ -16,7 +16,7 @@ namespace Boomkwekerij.Models
 		public enum Grootte
 		{
 			[Description("0 - 20")]
-			G1020,
+			G0020,
 			[Description("20 - 40")]
 			G2040,
 			[Description("40 - 60")]

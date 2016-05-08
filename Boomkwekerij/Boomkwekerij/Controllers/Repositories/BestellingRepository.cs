@@ -6,10 +6,10 @@ using System.Collections.ObjectModel;
 
 namespace Boomkwekerij.Controllers.Repositories
 {
-	public class BestellingRepository : IRepository<Bestelling>
+	public class BestellingRepository : IBestellingRepository
 	{
-		private IContext<Bestelling> bestellingContext;
-		public BestellingRepository(IContext<Bestelling> bestellingContext)
+		private IBestellingContext bestellingContext;
+		public BestellingRepository(IBestellingContext bestellingContext)
 		{
 			this.bestellingContext = bestellingContext;
 		}
@@ -37,6 +37,16 @@ namespace Boomkwekerij.Controllers.Repositories
 		public bool Update(Bestelling entity)
 		{
 			return bestellingContext.Update(entity);
+		}
+
+		public bool Remove(Bestelregel entity)
+		{
+			return bestellingContext.Remove(entity);
+		}
+
+		public bool Remove(Levering entity)
+		{
+			return bestellingContext.Remove(entity);
 		}
 	}
 }

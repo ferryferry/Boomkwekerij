@@ -10,7 +10,7 @@ using System.Collections.ObjectModel;
 
 namespace Boomkwekerij.Controllers.Contexts
 {
-	public class BestellingMemoryContext : IContext<Bestelling>
+	public class BestellingMemoryContext : IBestellingContext
 	{
 		private ObservableCollection<Bestelling> bestellingen;
 
@@ -61,6 +61,41 @@ namespace Boomkwekerij.Controllers.Contexts
 			{
 				throw ex;
 			}
+		}
+
+		public bool Remove(Bestelregel entity)
+		{
+			foreach(Bestelling b in bestellingen)
+			{
+				foreach(Bestelregel br in b.Bestelregels)
+				{
+					if(br == entity)
+					{
+						b.Bestelregels.Remove(br);
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
+		public bool Remove(Levering entity)
+		{
+			foreach (Bestelling b in bestellingen)
+			{
+				foreach (Bestelregel br in b.Bestelregels)
+				{
+					foreach(Levering l in br.Leveringen)
+					{
+						if(l == entity)
+						{
+							br.Leveringen.Remove(l);
+							return true;
+						}
+					}
+				}
+			}
+			return false;
 		}
 	}
 }

@@ -79,7 +79,7 @@ namespace Boomkwekerij.Controllers.Contexts
 					{
 						//command.ExecuteNonQuery();
 						command.ExecuteScalar(System.Data.CommandBehavior.KeyInfo);
-						entity.Id = getLastInsertedId(connection);
+						entity.Id = db.getLastInsertedId(connection);
 						return entity;
 					}
 					catch (SQLiteException e)
@@ -97,22 +97,7 @@ namespace Boomkwekerij.Controllers.Contexts
 			}
 		}
 
-		private int getLastInsertedId(SQLiteConnection connection)
-		{
-			int id = 0;
-			string query = string.Format("select last_insert_rowid() as id;");
-			using (SQLiteCommand command = new SQLiteCommand(query, connection))
-			{
-				using (SQLiteDataReader reader = command.ExecuteReader())
-				{
-					while (reader.Read())
-					{
-						id = Convert.ToInt32(reader["ID"]);
-					}
-				}
-			}
-			return id;
-		}
+		
 
 		public bool Remove(Klant entity)
 		{

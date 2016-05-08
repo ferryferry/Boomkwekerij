@@ -71,6 +71,7 @@
 			this.tsmiBewerkPlant = new System.Windows.Forms.ToolStripMenuItem();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.btnMaakFactuur = new System.Windows.Forms.Button();
+			this.chkBetaald = new System.Windows.Forms.CheckBox();
 			this.cmsPlantenVoorBestelling.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nudAantal)).BeginInit();
 			this.groupBox1.SuspendLayout();
@@ -455,6 +456,7 @@
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.chkBetaald);
 			this.groupBox2.Controls.Add(this.btnMaakFactuur);
 			this.groupBox2.Location = new System.Drawing.Point(532, 12);
 			this.groupBox2.Name = "groupBox2";
@@ -472,6 +474,17 @@
 			this.btnMaakFactuur.Text = "Maak factuur";
 			this.btnMaakFactuur.UseVisualStyleBackColor = true;
 			this.btnMaakFactuur.Click += new System.EventHandler(this.btnMaakFactuur_Click);
+			// 
+			// chkBetaald
+			// 
+			this.chkBetaald.AutoSize = true;
+			this.chkBetaald.Location = new System.Drawing.Point(6, 55);
+			this.chkBetaald.Name = "chkBetaald";
+			this.chkBetaald.Size = new System.Drawing.Size(62, 17);
+			this.chkBetaald.TabIndex = 35;
+			this.chkBetaald.Text = "Betaald";
+			this.chkBetaald.UseVisualStyleBackColor = true;
+			this.chkBetaald.CheckedChanged += new System.EventHandler(this.chkBetaald_CheckedChanged);
 			// 
 			// BestellingAddEdit
 			// 
@@ -511,6 +524,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.epFields)).EndInit();
 			this.cmsPlantenInVoorraad.ResumeLayout(false);
 			this.groupBox2.ResumeLayout(false);
+			this.groupBox2.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -560,5 +574,6 @@
 		private System.Windows.Forms.GroupBox groupBox2;
 		private System.Windows.Forms.ToolStripMenuItem bewerkBestelregelToolStripMenuItem;
 		private System.Windows.Forms.Button btnMaakFactuur;
+		private System.Windows.Forms.CheckBox chkBetaald;
 	}
 }
